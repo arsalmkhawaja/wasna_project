@@ -10,8 +10,7 @@ import img3 from "../assets/img3.jpg";
 import wasna_logo from "../assets/wasna logo.png";
 
 const LandingPage = () => {
-  const position: LatLngExpression = [33.565904425010615, 73.16505889682914]; // Coordinates for Islamabad, update as needed
-
+  const position = [33.565904425010615, 73.16505889682914];
   // Custom icon for the marker
   const customIcon = new Icon({
     iconUrl: customPin, // Your custom pin image path
