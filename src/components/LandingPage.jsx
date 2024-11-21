@@ -1,12 +1,24 @@
 import React from "react";
 import { Helmet } from "react-helmet";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { LatLngExpression, Icon } from "leaflet";
+import "leaflet/dist/leaflet.css";
+import customPin from "../assets/pin.png";
 import "../styles/LandingPage.css";
-import img1 from "../assets/img1.jpg";
 import img2 from "../assets/img2.jpg";
 import img3 from "../assets/img3.jpg";
 import wasna_logo from "../assets/wasna logo.png";
 
 const LandingPage = () => {
+  const position: LatLngExpression = [33.565904425010615, 73.16505889682914]; // Coordinates for Islamabad, update as needed
+
+  // Custom icon for the marker
+  const customIcon = new Icon({
+    iconUrl: customPin, // Your custom pin image path
+    iconSize: [40, 40], // Set the size of the custom icon
+    iconAnchor: [20, 40], // Set the anchor point for the marker
+    popupAnchor: [0, -40], // Set the position of the popup relative to the icon
+  });
   return (
     <div className="landing-page">
       {/* SEO Meta Tags */}
@@ -100,10 +112,29 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* Location */}
+      {/* Location Section */}
       <section className="location">
         <h2>Location</h2>
-        <img src="/path/to/map-image.jpg" alt="Map showing location" />
+        {/* React-Leaflet Map */}
+        <MapContainer
+          center={position}
+          zoom={13}
+          scrollWheelZoom={false}
+          style={{ width: "100%", height: "400px" }}
+        >
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          />
+          {/* Add a Marker with a custom icon */}
+          <Marker position={position} icon={customIcon}>
+            <Popup>
+              Wasna Palace
+              <br />
+              Event Location
+            </Popup>
+          </Marker>
+        </MapContainer>
       </section>
 
       {/* Footer */}
