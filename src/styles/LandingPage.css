@@ -33,9 +33,11 @@ body, html {
 }
 
 /* Hero Section */
+/* Hero Section */
 .hero {
-  background: url('../assets/img1.jpg') no-repeat center center/cover;
-  height: 60vh;
+  background-size: cover;
+  background-position: center;
+  height: 80vh; /* Adjust as needed */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -47,28 +49,36 @@ body, html {
   position: absolute;
   top: 0;
   left: 0;
-  height: 100%;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(10px); /* Blur effect for the hero image */
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+  backdrop-filter: blur(8px); /* Blurred background */
+  z-index: 1;
 }
 
 .hero-overlay {
   text-align: center;
-  color: gold;
-  font-family: "Times New Roman", serif;
   position: relative;
-  z-index: 1;
+  z-index: 2;
+  color: gold; /* Golden text color */
+  font-family: "Times New Roman", serif;
 }
 
-.hero h1 {
-  font-size: 48px;
+.hero-title {
+  font-size: 60px; /* Large title size */
   margin: 0;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Shadow for text */
 }
 
-.hero p {
-  font-size: 20px;
+.hero-subtitle {
+  font-size: 24px; /* Subtitle size */
+  margin: 10px 0 0 0;
+  font-weight: 500;
+  color: #b55850; /* Lighter gold or bronze tone for subtitle */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Subtle text shadow */
 }
+
 
 /* Why Choose Us */
 .why-choose-us {

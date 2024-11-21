@@ -1,6 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import "../styles/LandingPage.css";
+import img1 from "../assets/img1.jpg";
 import img2 from "../assets/img2.jpg";
 import img3 from "../assets/img3.jpg";
 import wasna_logo from "../assets/wasna logo.png";
@@ -44,10 +45,13 @@ const LandingPage = () => {
       </nav>
 
       {/* Hero Section */}
-      <section className="hero">
+      <section
+        className="hero"
+        style={{ backgroundImage: `url(${require("../assets/img1.jpg")})` }}
+      >
         <div className="hero-overlay">
-          <h1>Wasna Palace</h1>
-          <p>Make your Event Memorable</p>
+          <h1 className="hero-title">Wasna Palace</h1>
+          <p className="hero-subtitle">Make your Event Memorable</p>
         </div>
       </section>
 
