@@ -115,26 +115,29 @@ const LandingPage = () => {
       {/* Location Section */}
       <section className="location">
         <h2>Location</h2>
-        {/* React-Leaflet Map */}
-        <MapContainer
-          center={position}
-          zoom={13}
-          scrollWheelZoom={false}
-          style={{ width: "100%", height: "400px" }}
-        >
-          <TileLayer
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          />
-          {/* Add a Marker with a custom icon */}
-          <Marker position={position} icon={customIcon}>
-            <Popup>
-              Wasna Palace
-              <br />
-              Event Location
-            </Popup>
-          </Marker>
-        </MapContainer>
+        {/* Wrapper for the map to control spacing */}
+        <div className="map-wrapper">
+          {/* React-Leaflet Map */}
+          <MapContainer
+            center={position}
+            zoom={13}
+            scrollWheelZoom={false}
+            style={{ width: "100%", height: "400px" }}
+          >
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            />
+            {/* Add a Marker with a custom icon */}
+            <Marker position={position} icon={customIcon}>
+              <Popup>
+                Wasna Palace
+                <br />
+                Event Location
+              </Popup>
+            </Marker>
+          </MapContainer>
+        </div>
       </section>
 
       {/* Footer */}
