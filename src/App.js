@@ -1,10 +1,9 @@
 import React from "react";
-import LandingPage from "./components/LandingPage"; // Adjust the path if the file is in a different folder
+import LandingPage from "./components/LandingPage"; 
 
 function App() {
   return (
     <div>
-      {/* Rendering the Landing Page Component */}
       <LandingPage />
     </div>
   );
