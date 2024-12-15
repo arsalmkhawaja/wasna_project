@@ -1,12 +1,23 @@
+// src/App.js
 import React from "react";
-import LandingPage from "./components/LandingPage"; 
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import LandingPage from "./components/LandingPage";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
-function App() {
+const App = () => {
   return (
-    <div>
-      <LandingPage />
-    </div>
+    <Router>
+      <Navbar />
+
+      <main>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+        </Routes>
+      </main>
+      <Footer />
+    </Router>
   );
-}
+};
 
 export default App;

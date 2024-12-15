@@ -7,7 +7,6 @@ import customPin from "../assets/pin.png";
 import "../styles/LandingPage.css";
 import img2 from "../assets/img2.jpg";
 import img3 from "../assets/img3.jpg";
-import wasna_logo from "../assets/wasna logo.png";
 
 const LandingPage = () => {
   const position = [33.565904425010615, 73.16505889682914];
@@ -29,31 +28,6 @@ const LandingPage = () => {
         />
       </Helmet>
 
-      {/* Navbar */}
-      <nav className="custom-navbar">
-        <div className="navbar-container">
-          {/* Left Links */}
-          <ul className="navbar-links left-links">
-            <li className="active">Home</li>
-            <li>Event Management</li>
-            <li>Event Complex</li>
-            <li>4D Restaurant</li>
-          </ul>
-
-          {/* Logo */}
-          <div className="navbar-logo">
-            <img src={wasna_logo} alt="Wasna Palace Logo" />
-          </div>
-
-          {/* Right Links */}
-          <ul className="navbar-links right-links">
-            <li>Wasna Pure</li>
-            <li>Wasna Harmony Vista</li>
-            <li>About Us</li>
-            <li>Contact Us</li>
-          </ul>
-        </div>
-      </nav>
 
       {/* Hero Section */}
       <section
@@ -138,21 +112,6 @@ const LandingPage = () => {
           </MapContainer>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="footer">
-        <div>
-          <p>© 2024 Wasna Palace. All rights reserved.</p>
-          <p>
-            Block E Jinnah Garden, Islamabad, ICT, 44000 | Call us: +XXX XXXX
-            XXXX
-          </p>
-        </div>
-        <div className="social-icons">
-          <a href="#">Facebook</a>
-          <a href="#">Instagram</a>
-        </div>
-      </footer>
     </div>
   );
 };

@@ -6,12 +6,19 @@ body, html {
 }
 
 .landing-page {
-  width: 100%;
-  height: 100vh; /* Ensure full screen height */
   display: flex;
   flex-direction: column;
-  overflow-x: hidden;
+  min-height: 100vh; 
 }
+
+
+.hero, .why-choose-us, .services, .features, .location {
+  /* Other styles */
+  flex-grow: 1; /* Allow sections to take up remaining space */
+}
+
+
+
 
 /* Navbar Styling */
 .custom-navbar {
