@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import Navbar from "../components/Navbar"; // Import the Navbar component
 import {
@@ -7,6 +7,7 @@ import {
   FormControl,
   InputLabel,
   Button,
+  Typography,
 } from "@mui/material";
 
 const BookingPage = () => {
@@ -37,15 +38,15 @@ const BookingPage = () => {
       background: "#eaeaea",
       zIndex: 0,
     },
-    activeLine: {
+    activeLine: (activeStep) => ({
       position: "absolute",
       top: "50%",
       left: "5%",
       height: "4px",
       background: "#c00",
       zIndex: 1,
-      width: "25%", // Adjust this percentage based on the active step
-    },
+      width: `${31 * (activeStep - 1)}%`, // Dynamically update width based on step
+    }),
     stepContainer: {
       display: "flex",
       flexDirection: "column",
@@ -103,11 +104,113 @@ const BookingPage = () => {
   };
 
   // State for dropdown values
-  const [eventType, setEventType] = React.useState("");
-  const [venue, setVenue] = React.useState("");
-  const [date, setDate] = React.useState("");
+  const [activeStep, setActiveStep] = useState(1); // Track the current step
+  const [formData, setFormData] = useState({
+    eventType: "",
+    venue: "",
+    date: "",
+    foodMenu: "",
+    decor: "",
+  });
 
-  const activeStep = 1; // Set the current active step
+  // Handle step navigation
+  const handleNext = () => {
+    if (activeStep < 4) setActiveStep((prev) => prev + 1);
+  };
+
+  const handleBack = () => {
+    if (activeStep > 1) setActiveStep((prev) => prev - 1);
+  };
+
+  const handleChange = (field, value) => {
+    setFormData({ ...formData, [field]: value });
+  };
+
+  const renderForm = () => {
+    switch (activeStep) {
+      case 1:
+        return (
+          <>
+            <FormControl style={styles.formControl}>
+              <InputLabel>Select Event Type</InputLabel>
+              <Select
+                value={formData.eventType}
+                onChange={(e) => handleChange("eventType", e.target.value)}
+              >
+                <MenuItem value="Wedding">Wedding</MenuItem>
+                <MenuItem value="Birthday">Birthday</MenuItem>
+                <MenuItem value="Corporate">Corporate</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl style={styles.formControl}>
+              <InputLabel>Select Venue</InputLabel>
+              <Select
+                value={formData.venue}
+                onChange={(e) => handleChange("venue", e.target.value)}
+              >
+                <MenuItem value="Hall A">Hall A</MenuItem>
+                <MenuItem value="Hall B">Hall B</MenuItem>
+                <MenuItem value="Hall C">Hall C</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl style={styles.formControl}>
+              <InputLabel>Choose Date(s)</InputLabel>
+              <Select
+                value={formData.date}
+                onChange={(e) => handleChange("date", e.target.value)}
+              >
+                <MenuItem value="2024-01-01">1st January 2024</MenuItem>
+                <MenuItem value="2024-02-15">15th February 2024</MenuItem>
+                <MenuItem value="2024-03-20">20th March 2024</MenuItem>
+              </Select>
+            </FormControl>
+          </>
+        );
+      case 2:
+        return (
+          <FormControl style={styles.formControl}>
+            <InputLabel>Food Menu</InputLabel>
+            <Select
+              value={formData.foodMenu}
+              onChange={(e) => handleChange("foodMenu", e.target.value)}
+            >
+              <MenuItem value="Vegetarian">Vegetarian</MenuItem>
+              <MenuItem value="Non-Vegetarian">Non-Vegetarian</MenuItem>
+              <MenuItem value="Mixed">Mixed</MenuItem>
+            </Select>
+          </FormControl>
+        );
+      case 3:
+        return (
+          <FormControl style={styles.formControl}>
+            <InputLabel>Decor Theme</InputLabel>
+            <Select
+              value={formData.decor}
+              onChange={(e) => handleChange("decor", e.target.value)}
+            >
+              <MenuItem value="Traditional">Traditional</MenuItem>
+              <MenuItem value="Modern">Modern</MenuItem>
+              <MenuItem value="Rustic">Rustic</MenuItem>
+            </Select>
+          </FormControl>
+        );
+      case 4:
+        return (
+          <Typography variant="h6">
+            Please review your details and confirm your booking:
+            <ul>
+              <li>Event Type: {formData.eventType}</li>
+              <li>Venue: {formData.venue}</li>
+              <li>Date: {formData.date}</li>
+              <li>Food Menu: {formData.foodMenu}</li>
+              <li>Decor Theme: {formData.decor}</li>
+            </ul>
+          </Typography>
+        );
+      default:
+        return null;
+    }
+  };
 
   return (
     <div>
@@ -131,7 +234,7 @@ const BookingPage = () => {
           {/* Background Line */}
           <div style={styles.progressLine}></div>
           {/* Active Line */}
-          <div style={styles.activeLine}></div>
+          <div style={styles.activeLine(activeStep)}></div>
 
           {/* Steps */}
           {["Choose Event", "Food Menu", "Decor", "Confirmation"].map(
@@ -149,42 +252,27 @@ const BookingPage = () => {
 
         {/* Form Section */}
         <form style={styles.form}>
-          <div style={styles.formGroup}>
-            <FormControl style={styles.formControl}>
-              <InputLabel>Select Event Type</InputLabel>
-              <Select
-                value={eventType}
-                onChange={(e) => setEventType(e.target.value)}
+          {renderForm()}
+          <div style={{ marginTop: "20px" }}>
+            {activeStep > 1 && (
+              <Button
+                variant="contained"
+                onClick={handleBack}
+                style={{ marginRight: "10px" }}
               >
-                <MenuItem value="Wedding">Wedding</MenuItem>
-                <MenuItem value="Birthday">Birthday</MenuItem>
-                <MenuItem value="Corporate">Corporate</MenuItem>
-              </Select>
-            </FormControl>
+                Back
+              </Button>
+            )}
+            {activeStep < 4 ? (
+              <Button variant="contained" color="primary" onClick={handleNext}>
+                Next →
+              </Button>
+            ) : (
+              <Button variant="contained" color="success">
+                Confirm
+              </Button>
+            )}
           </div>
-          <div style={styles.formGroup}>
-            <FormControl style={styles.formControl}>
-              <InputLabel>Select Venue</InputLabel>
-              <Select value={venue} onChange={(e) => setVenue(e.target.value)}>
-                <MenuItem value="Hall A">Hall A</MenuItem>
-                <MenuItem value="Hall B">Hall B</MenuItem>
-                <MenuItem value="Hall C">Hall C</MenuItem>
-              </Select>
-            </FormControl>
-          </div>
-          <div style={styles.formGroup}>
-            <FormControl style={styles.formControl}>
-              <InputLabel>Choose Date(s)</InputLabel>
-              <Select value={date} onChange={(e) => setDate(e.target.value)}>
-                <MenuItem value="2024-01-01">1st January 2024</MenuItem>
-                <MenuItem value="2024-02-15">15th February 2024</MenuItem>
-                <MenuItem value="2024-03-20">20th March 2024</MenuItem>
-              </Select>
-            </FormControl>
-          </div>
-          <Button variant="contained" color="primary" style={styles.button}>
-            Next →
-          </Button>
         </form>
       </div>
     </div>
