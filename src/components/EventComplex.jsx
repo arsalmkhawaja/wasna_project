@@ -31,7 +31,7 @@ const BookingPage = () => {
     },
     progressLine: {
       position: "absolute",
-      top: "50%",
+      top: "35%",
       left: "5%",
       right: "5%",
       height: "4px",
@@ -40,7 +40,7 @@ const BookingPage = () => {
     },
     activeLine: (activeStep) => ({
       position: "absolute",
-      top: "50%",
+      top: "35%",
       left: "5%",
       height: "4px",
       background: "#c00",
