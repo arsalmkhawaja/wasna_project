@@ -1,26 +1,43 @@
-// src/components/Navbar.js
 import React from "react";
+import { Link } from "react-router-dom";
 import wasna_logo from "../assets/wasna logo.png";
-import "../styles/LandingPage.css";
 
 const Navbar = () => {
   return (
     <nav className="custom-navbar">
       <div className="navbar-container">
         <ul className="navbar-links left-links">
-          <li className="active">Home</li>
-          <li>Event Management</li>
-          <li>Event Complex</li>
-          <li>4D Restaurant</li>
+          <li className="active">
+            <Link to="/" style={{ color: '#d4a373', textDecoration: 'none' }}>Home</Link>
+          </li>
+          <li>
+            <Link to="/event-management" style={{ color: '#d4a373', textDecoration: 'none' }}>Event Management</Link>
+          </li>
+          <li>
+            <Link to="/event-complex" style={{ color: '#d4a373', textDecoration: 'none' }}>Event Complex</Link>
+          </li>
+          <li>
+            <Link to="/4d-restaurant" style={{ color: '#d4a373', textDecoration: 'none' }}>4D Restaurant</Link>
+          </li>
         </ul>
         <div className="navbar-logo">
-          <img src={wasna_logo} alt="Wasna Palace Logo" />
+          <Link to="/">
+            <img src={wasna_logo} alt="Wasna Palace Logo" />
+          </Link>
         </div>
         <ul className="navbar-links right-links">
-          <li>Wasna Pure</li>
-          <li>Wasna Harmony Vista</li>
-          <li>About Us</li>
-          <li>Contact Us</li>
+          <li>
+            <Link to="/wasna-pure" style={{ color: '#d4a373', textDecoration: 'none' }}>Wasna Pure</Link>
+          </li>
+          <li>
+            <Link to="/harmony-vista" style={{ color: '#d4a373', textDecoration: 'none' }}>Wasna Harmony Vista</Link>
+          </li>
+          <li>
+            <Link to="/about-us" style={{ color: '#d4a373', textDecoration: 'none' }}>About Us</Link>
+          </li>
+          <li>
+            <Link to="/contact-us" style={{ color: '#d4a373', textDecoration: 'none' }}>Contact Us</Link>
+          </li>
         </ul>
       </div>
     </nav>
