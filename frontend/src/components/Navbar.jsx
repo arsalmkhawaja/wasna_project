@@ -27,10 +27,10 @@ const Navbar = () => {
         </div>
         <ul className="navbar-links right-links">
           <li>
-            <Link to="/wasna-pure" style={{ color: '#d4a373', textDecoration: 'none' }}>Wasna Pure</Link>
+            <Link to="/wasna-pure" style={{ color: '#d4a373', textDecoration: 'none' }}>Pure</Link>
           </li>
           <li>
-            <Link to="/harmony-vista" style={{ color: '#d4a373', textDecoration: 'none' }}>Wasna Harmony Vista</Link>
+            <Link to="/harmony-vista" style={{ color: '#d4a373', textDecoration: 'none' }}>Harmony Vista</Link>
           </li>
           <li>
             <Link to="/about-us" style={{ color: '#d4a373', textDecoration: 'none' }}>About Us</Link>
