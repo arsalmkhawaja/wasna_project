@@ -10,7 +10,7 @@ import img3 from "../assets/img3.jpg";
 
 const LandingPage = () => {
   const position = [33.565904425010615, 73.16505889682914];
-  
+
   // Custom icon for the marker
   const customIcon = new Icon({
     iconUrl: customPin, // Your custom pin image path
@@ -40,12 +40,16 @@ const LandingPage = () => {
         <div className="navbar-container">
           <ul className="navbar-links left-links">
             <li className="active">Home</li>
-            <li>Event Complex</li>
+            <li>Event </li>
             <li>Wasna Palace</li>
             <li>4D Restaurant</li>
           </ul>
           <div className="navbar-logo">
-            <img src={require("../assets/wasna logo.png")}w alt="Wasna Palace Logo" />
+            <img
+              src={require("../assets/wasna logo.png")}
+              w
+              alt="Wasna Palace Logo"
+            />
           </div>
           <ul className="navbar-links right-links">
             <li>Pure</li>
@@ -75,7 +79,9 @@ const LandingPage = () => {
         <h2>Why Choose Us?</h2>
         <div className="why-choose-us-container">
           <p>
-            At Wasna Palace, we blend tradition with modern elegance to create unforgettable events. Our state-of-the-art facilities, exceptional service, and stunning ambiance ensure that every moment is perfect.
+            At Wasna Palace, we blend tradition with modern elegance to create
+            unforgettable events. Our state-of-the-art facilities, exceptional
+            service, and stunning ambiance ensure that every moment is perfect.
           </p>
           <img src={img2} alt="Decorated Tent" className="blur-on-hover" />
         </div>
@@ -94,9 +100,7 @@ const LandingPage = () => {
               <li>Catering and Menu Selection</li>
               <li>Entertainment and Music</li>
             </ul>
-            <button className="event-management-button">
-              Learn More →
-            </button>
+            <button className="event-management-button">Learn More →</button>
           </div>
         </div>
       </section>
@@ -148,7 +152,9 @@ const LandingPage = () => {
 
       {/* Footer */}
       <footer className="footer" id="contact">
-        <p>&copy; {new Date().getFullYear()} Wasna Palace. All rights reserved.</p>
+        <p>
+          &copy; {new Date().getFullYear()} Wasna Palace. All rights reserved.
+        </p>
         <div className="footer-links">
           <a href="#home">Home</a>
           <a href="#event-complex">Event Complex</a>

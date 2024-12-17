@@ -5,6 +5,7 @@ import LandingPage from "./components/LandingPage";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import BookingPage from "./components/EventComplex";
+import Restaurant from "./components/Restaurant";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="event-complex" element={<BookingPage />} />
+          <Route path="restaurant" element={<Restaurant />} />
         </Routes>
       </main>
       <Footer />
