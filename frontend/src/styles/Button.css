@@ -1,0 +1,20 @@
+/* backend/styles/Button.css */
+
+.custom-button {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    border: none;
+    padding: 12px 30px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    text-decoration: none;
+  }
+  
+  .custom-button:hover {
+    background-color: var(--accent-color);
+    transform: translateY(-3px);
+  }
+  

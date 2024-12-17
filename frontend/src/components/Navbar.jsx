@@ -14,10 +14,10 @@ const Navbar = () => {
             <Link to="/event-management" style={{ color: '#d4a373', textDecoration: 'none' }}>Event Complex</Link>
           </li>
           <li>
-            <Link to="/event-complex" style={{ color: '#d4a373', textDecoration: 'none' }}>Palace</Link>
+            <Link to="/event-complex" style={{ color: '#d4a373', textDecoration: 'none' }}>Wasna Palace</Link>
           </li>
           <li>
-            <Link to="/4d-restaurant" style={{ color: '#d4a373', textDecoration: 'none' }}>4D</Link>
+            <Link to="/4d-restaurant" style={{ color: '#d4a373', textDecoration: 'none' }}>4D Restaurant</Link>
           </li>
         </ul>
         <div className="navbar-logo">

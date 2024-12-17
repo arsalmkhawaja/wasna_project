@@ -221,10 +221,10 @@ const BookingPage = () => {
       <div style={styles.bookingPage}>
         {/* SEO Meta Tags */}
         <Helmet>
-          <title>Wasna Palace - Make Your Event Memorable</title>
+          <title>Wasna Event Cmplex - Make Your Event Memorable</title>
           <meta
             name="description"
-            content="Plan your next big event at Wasna Palace. Offering premium event management with world-class facilities."
+            content="Plan your next big event at Wasna Event Complex. Offering premium event management with world-class facilities."
           />
         </Helmet>
         <h1 style={styles.heading}>Book Now</h1>
