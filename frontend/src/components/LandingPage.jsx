@@ -1,4 +1,3 @@
-// src/components/LandingPage.jsx
 import React from "react";
 import { Helmet } from "react-helmet";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
@@ -8,27 +7,26 @@ import customPin from "../assets/pin.png";
 import "../styles/LandingPage.css";
 import img2 from "../assets/img2.jpg";
 import img3 from "../assets/img3.jpg";
-import logo from "../assets/wasna logo.png"; // Ensure correct path
 
 const LandingPage = () => {
   const position = [33.565904425010615, 73.16505889682914];
-
+  
   // Custom icon for the marker
   const customIcon = new Icon({
-    iconUrl: customPin,
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
-    popupAnchor: [0, -40],
+    iconUrl: customPin, // Your custom pin image path
+    iconSize: [40, 40], // Set the size of the custom icon
+    iconAnchor: [20, 40], // Set the anchor point for the marker
+    popupAnchor: [0, -40], // Set the position of the popup relative to the icon
   });
 
   return (
     <div className="landing-page">
       {/* SEO and Font Links */}
       <Helmet>
-        <title>Wasna Event Complex - Make Your Event Memorable</title>
+        <title>Wasna Palace - Make Your Event Memorable</title>
         <meta
           name="description"
-          content="Plan your next big event at Wasna Event Complex. Offering premium event management with world-class facilities."
+          content="Plan your next big event at Wasna Palace. Offering premium event management with world-class facilities."
         />
         {/* Google Fonts */}
         <link
@@ -47,7 +45,7 @@ const LandingPage = () => {
             <li>4D Restaurant</li>
           </ul>
           <div className="navbar-logo">
-            <img src={logo} alt="Wasna Palace Logo" />
+            <img src={require("../assets/wasna logo.png")}w alt="Wasna Palace Logo" />
           </div>
           <ul className="navbar-links right-links">
             <li>Pure</li>
@@ -64,7 +62,7 @@ const LandingPage = () => {
         style={{ backgroundImage: `url(${require("../assets/img1.jpg")})` }}
       >
         <div className="hero-overlay">
-          <h1 className="hero-title">Wasna Event Complex</h1>
+          <h1 className="hero-title">Wasna Palace</h1>
           <p className="hero-subtitle">Make Your Event Memorable</p>
           <a href="#contact" className="hero-button">
             Book Now
@@ -74,27 +72,21 @@ const LandingPage = () => {
 
       {/* Why Choose Us */}
       <section className="why-choose-us">
-        <h2 className="section-title">Why Choose Us?</h2>
-        <div className="content-container">
-          <div className="text-content">
-            <p>
-              At Wasna Event Complex, we blend tradition with modern elegance to create unforgettable events. Our state-of-the-art facilities, exceptional service, and stunning ambiance ensure that every moment is perfect.
-            </p>
-          </div>
-          <div className="image-content">
-            <img src={img2} alt="Decorated Tent" className="cover-image" />
-          </div>
+        <h2>Why Choose Us?</h2>
+        <div className="why-choose-us-container">
+          <p>
+            At Wasna Palace, we blend tradition with modern elegance to create unforgettable events. Our state-of-the-art facilities, exceptional service, and stunning ambiance ensure that every moment is perfect.
+          </p>
+          <img src={img2} alt="Decorated Tent" className="blur-on-hover" />
         </div>
       </section>
 
       {/* Services */}
       <section className="services">
-        <h2 className="section-title">Our Services</h2>
-        <div className="content-container">
-          <div className="image-content">
-            <img src={img3} alt="Decorated Table" className="cover-image" />
-          </div>
-          <div className="text-content">
+        <h2>Our Services</h2>
+        <div className="services-container">
+          <img src={img3} alt="Decorated Table" className="blur-on-hover" />
+          <div>
             <p>Our comprehensive event management services include:</p>
             <ul>
               <li>Customized Event Planning</li>
@@ -102,16 +94,15 @@ const LandingPage = () => {
               <li>Catering and Menu Selection</li>
               <li>Entertainment and Music</li>
             </ul>
-            <a href="#services" className="learn-more-button">
+            <button className="event-management-button">
               Learn More →
-            </a>
+            </button>
           </div>
         </div>
       </section>
 
       {/* Features */}
       <section className="features">
-        <h2 className="section-title">Our Features</h2>
         <div className="features-grid">
           <div className="feature-item">
             <span className="feature-icon">🎉</span>
@@ -134,13 +125,13 @@ const LandingPage = () => {
 
       {/* Location Section */}
       <section className="location" id="location">
-        <h2 className="section-title">Our Location</h2>
+        <h2>Our Location</h2>
         <div className="map-wrapper">
           <MapContainer
             center={position}
             zoom={13}
             scrollWheelZoom={false}
-            style={{ width: "100%", height: "100%" }}
+            style={{ width: "100%", height: "400px" }}
           >
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

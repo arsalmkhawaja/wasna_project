@@ -4,7 +4,6 @@ const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const User = require('../models/User');
 const twilioService = require('../utils/twilioService');
-const sendEmail = require('../utils/sendEmail'); // Optional: If email notifications are needed
 const logger = require('../utils/logger'); // Winston logger
 
 // Generate JWT (Optional: If you plan to use JWT for authenticated routes)

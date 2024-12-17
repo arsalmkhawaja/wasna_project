@@ -1,55 +1,76 @@
-// frontend/src/components/Footer.jsx
 import React from "react";
-import { Link } from "react-router-dom";
-import { IconButton } from "@mui/material";
-import { Facebook, Instagram, Twitter } from "@mui/icons-material";
-import wasna_logo from "../assets/wasna logo.png"; // Ensure correct path
 
 const Footer = () => {
   const footerStyle = {
-    backgroundColor: '#001f3f', // Deep Navy
-    padding: '40px 20px',
-    color: '#ffffff',
-    textAlign: 'center',
+    backgroundColor: '#fff', // White background
+    padding: '20px 50px', // Padding around the content
+    textAlign: 'center', // Center align all text
+    borderTop: '2px solid #d4a373', // Gold border at the top
+    color: '#333', // Dark grey text color for visibility
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
   };
 
-  const sectionStyle = {
-    marginBottom: '20px',
+  const h2Style = {
+    fontSize: '24px',
+    fontWeight: 'bold',
+    color: '#b55850', // Dark gold color
+    marginBottom: '10px',
+    flex: '1 0 100%', // Take full width to ensure it breaks line
+    textAlign: 'center'
   };
 
-  const linkStyle = {
-    color: '#d4a373',
+  const footerSectionsStyle = {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    flexWrap: 'wrap'
+  };
+
+  const footerSectionStyle = {
+    margin: '5px 20px', // Adding horizontal margin for spacing
+    display: 'flex',
+    alignItems: 'center'
+  };
+
+  const footerLegalStyle = {
+    marginTop: '10px',
+    fontSize: '14px',
+    color: '#666', // Lighter text color
+    width: '100%',
+    textAlign: 'center'
+  };
+
+  const legalLinksStyle = {
+    margin: '0 5px',
     textDecoration: 'none',
-    margin: '0 10px',
+    color: '#d4a373', // Gold color for links
   };
 
   return (
     <footer style={footerStyle}>
-      <div style={sectionStyle}>
-        <img src={wasna_logo} alt="Wasna Palace Logo" style={{ height: '50px' }} />
+      <h2 style={h2Style}>WASNA PALACE</h2>
+      <div style={footerSectionsStyle}>
+        <div style={footerSectionStyle}>
+          <span>📍 Block E Jinnah Garden, Islamabad, ICT, 44000</span>
+        </div>
+        <div style={footerSectionStyle}>
+          <span>📞 Call us: +XXX XXXX XXXX</span>
+        </div>
       </div>
-      <div style={sectionStyle}>
-        <p>📍 Block E Jinnah Garden, Islamabad, ICT, 44000</p>
-        <p>📞 Call us: +XXX XXXX XXXX</p>
+      <div style={footerSectionsStyle}>
+        <a href="#" style={legalLinksStyle}>Facebook</a>
+        <a href="#" style={legalLinksStyle}>Instagram</a>
       </div>
-      <div style={sectionStyle}>
-        <IconButton href="#" style={{ color: '#d4a373' }}>
-          <Facebook />
-        </IconButton>
-        <IconButton href="#" style={{ color: '#d4a373' }}>
-          <Instagram />
-        </IconButton>
-        <IconButton href="#" style={{ color: '#d4a373' }}>
-          <Twitter />
-        </IconButton>
-      </div>
-      <div style={sectionStyle}>
-        <Link to="/privacy-policy" style={linkStyle}>Privacy Policy</Link>
-        <Link to="/terms-of-service" style={linkStyle}>Terms of Service</Link>
-        <Link to="/cookies" style={linkStyle}>Cookies</Link>
-      </div>
-      <div>
+      <div style={footerLegalStyle}>
         <p>© 2024 Wasna Palace. All rights reserved.</p>
+        <div>
+          <a href="#" style={legalLinksStyle}>Privacy Policy</a> | 
+          <a href="#" style={legalLinksStyle}>Terms of Service</a> | 
+          <a href="#" style={legalLinksStyle}>Cookies</a>
+        </div>
       </div>
     </footer>
   );
