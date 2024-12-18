@@ -77,6 +77,7 @@ a {
 
 .navbar-links li a.active {
   font-weight: bold;
+  color: var(--accent-color);
 }
 
 .navbar-links li a:hover {

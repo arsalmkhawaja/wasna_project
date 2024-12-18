@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import wasna_logo from "../assets/wasna logo.png";
 import "../styles/LandingPage.css";
 
@@ -8,73 +8,77 @@ const Navbar = () => {
     <nav className="custom-navbar">
       <div className="navbar-container">
         <ul className="navbar-links left-links">
-          <li className="active">
-            <Link to="/" style={{ color: "#d4a373", textDecoration: "none" }}>
+          <li>
+            <NavLink 
+              to="/" 
+              end
+              className={({ isActive }) => (isActive ? "active" : undefined)}
+            >
               Home
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link
-              to="/event-management"
-              style={{ color: "#d4a373", textDecoration: "none" }}
+            <NavLink 
+              to="/event-management" 
+              className={({ isActive }) => (isActive ? "active" : undefined)}
             >
               Event Complex
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link
-              to="/event-complex"
-              style={{ color: "#d4a373", textDecoration: "none" }}
+            <NavLink 
+              to="/event-complex" 
+              className={({ isActive }) => (isActive ? "active" : undefined)}
             >
               Wasna Palace
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link
-              to="/restaurant"
-              style={{ color: "#d4a373", textDecoration: "none" }}
+            <NavLink 
+              to="/restaurant" 
+              className={({ isActive }) => (isActive ? "active" : undefined)}
             >
               4D Restaurant
-            </Link>
+            </NavLink>
           </li>
         </ul>
         <div className="navbar-logo">
-          <Link to="/">
+          <NavLink to="/">
             <img src={wasna_logo} alt="Wasna Palace Logo" />
-          </Link>
+          </NavLink>
         </div>
         <ul className="navbar-links right-links">
           <li>
-            <Link
-              to="/wasna-pure"
-              style={{ color: "#d4a373", textDecoration: "none" }}
+            <NavLink 
+              to="/wasna-pure" 
+              className={({ isActive }) => (isActive ? "active" : undefined)}
             >
               Pure
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link
-              to="/harmony-vista"
-              style={{ color: "#d4a373", textDecoration: "none" }}
+            <NavLink 
+              to="/harmony-vista" 
+              className={({ isActive }) => (isActive ? "active" : undefined)}
             >
               Harmony Vista
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link
-              to="/about-us"
-              style={{ color: "#d4a373", textDecoration: "none" }}
+            <NavLink 
+              to="/about-us" 
+              className={({ isActive }) => (isActive ? "active" : undefined)}
             >
               About Us
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link
-              to="/contact-us"
-              style={{ color: "#d4a373", textDecoration: "none" }}
+            <NavLink 
+              to="/contact-us" 
+              className={({ isActive }) => (isActive ? "active" : undefined)}
             >
               Contact Us
-            </Link>
+            </NavLink>
           </li>
         </ul>
       </div>
