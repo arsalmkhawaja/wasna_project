@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;700&display=swap');
 
 :root {
-  --primary-color: #d4a373;
-  --secondary-color: #001f3f;
-  --accent-color: #b55850;
+  --primary-color: #d4a373; /* Gold */
+  --secondary-color: #001f3f; /* Deep Navy */
+  --accent-color: #b55850; /* Bronze */
   --text-dark: #4e342e;
   --text-light: #ffffff;
   --background-light: #f5f5f5;
@@ -42,6 +42,7 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 10px 0;
   position: fixed;
   top: 0;
   z-index: 1000;
@@ -50,11 +51,10 @@ a {
 
 .navbar-container {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  width: 100%;
+  width: 90%;
   max-width: 1200px;
-  gap: 30px;
 }
 
 .navbar-links {
@@ -80,10 +80,6 @@ a {
   color: var(--accent-color);
 }
 
-.navbar-links li a:hover {
-  color: var(--accent-color);
-}
-
 .navbar-links li a::after {
   content: "";
   position: absolute;
@@ -99,13 +95,17 @@ a {
   width: 100%;
 }
 
+.navbar-links li a:hover {
+  color: var(--accent-color);
+}
+
 .navbar-logo {
   flex: 0 0 auto;
   text-align: center;
 }
 
 .navbar-logo img {
-  height: 80px;
+  height: 60px;
   object-fit: contain;
 }
 
@@ -174,6 +174,7 @@ a {
   background-color: var(--accent-color);
 }
 
+/* Why Choose Us Section */
 .why-choose-us {
   background-color: var(--text-light);
   text-align: center;
@@ -197,7 +198,7 @@ a {
 
 .why-choose-us-content {
   flex: 0 0 50%;
-  text-align: left;
+  text-align: center;
   font-family: var(--font-heading);
   padding-left: 20px;
 }
@@ -214,6 +215,7 @@ a {
   color: var(--primary-color);
 }
 
+/* Services Section */
 .services {
   text-align: center;
   background-color: var(--background-light);
@@ -283,8 +285,9 @@ a {
   transform: translateY(-1px);
 }
 
+/* Features Section */
 .features {
-  padding: 30px 20px;
+  padding: 20px 20px;
   background-color: var(--primary-color);
   text-align: center;
 }
@@ -309,6 +312,7 @@ a {
 .feature-item {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   flex: 1 1 120px;
 }
@@ -323,6 +327,7 @@ a {
   font-size: 16px;
 }
 
+/* Location Section */
 .location {
   padding: 30px 20px;
   background-color: var(--text-light);
@@ -348,6 +353,7 @@ a {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+/* Footer Section */
 .footer {
   background-color: var(--secondary-color);
   color: var(--text-light);
@@ -381,111 +387,143 @@ a {
   text-decoration: underline;
 }
 
-@media (max-width: 1200px) {
-  .why-choose-us-container, .services-container, .features-grid {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .why-choose-us-content, .services-content {
-    text-align: center;
-    max-width: 100%;
-    padding: 10px 0;
-  }
-
-  .why-choose-us img, .services img {
-    max-width: 100%;
-    flex: 0 0 100%;
-  }
-}
-
 @media (max-width: 768px) {
+  .navbar-links.right-links {
+    display: none;
+  }
+
+  .navbar-links.left-links {
+    display: none;
+  }
+
+  .hamburger {
+    display: block;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
   .navbar-container {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .navbar-links {
-    gap: 15px;
-    margin-top: 10px;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .left-links, .right-links {
-    justify-content: center;
-  }
-
-  .hero {
-    min-height: 50vh;
-  }
-
-  .hero-title {
-    font-size: 36px;
-  }
-
-  .hero-subtitle {
-    font-size: 18px;
-  }
-
-  .why-choose-us-container, .services-container, .features-grid {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .why-choose-us-content, .services-content {
-    text-align: center;
-    max-width: 100%;
-    padding: 10px 0;
-  }
-
-  .why-choose-us img, .services img {
-    max-width: 100%;
-    flex: 0 0 100%;
-  }
-
-  .features-grid {
-    gap: 10px;
-  }
-
-  .map-wrapper {
-    padding: 0 5px;
-    height: 300px;
+    position: relative;
   }
 }
 
 @media (max-width: 480px) {
-  .hero-title {
-    font-size: 28px;
+  .drawer {
+    width: 200px;
   }
 
-  .hero-subtitle {
+  .drawer-links li a {
     font-size: 16px;
   }
+}
 
-  .navbar-links li a {
-    font-size: 14px;
+.drawer {
+  position: fixed;
+  top: 0;
+  right: -250px;
+  width: 250px;
+  height: 100%;
+  background-color: var(--text-light);
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+  transition: right 0.3s ease;
+  z-index: 1001;
+  padding-top: 60px; 
+}
+
+.drawer.open {
+  right: 0; 
+}
+.drawer-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  color: red; 
+  font-size: 24px;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.drawer-close:hover {
+  color: darkred;
+  transform: scale(1.1); 
+}
+.drawer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.drawer-links li {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.drawer-links li a {
+  font-size: 18px;
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.drawer-links li a.active {
+  color: var(--accent-color);
+  font-weight: bold;
+}
+
+.drawer-links li a:hover {
+  color: var(--accent-color);
+}
+
+/* Overlay Styling */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+/* Hamburger Icon Styling */
+.hamburger {
+  display: none; 
+  cursor: pointer;
+  color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+  .navbar-links.right-links {
+    display: none;
   }
 
-  .event-management-button, .hero-button {
-    font-size: 12px;
-    padding: 6px 14px;
+  .navbar-links.left-links {
+    display: none;
   }
 
-  .features-grid {
-    gap: 10px;
+  .hamburger {
+    display: block;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
   }
 
-  .feature-item {
-    flex-direction: column;
-    align-items: center;
+  .navbar-container {
+    position: relative;
+  }
+}
+
+@media (max-width: 480px) {
+  .drawer {
+    width: 200px;
   }
 
-  .feature-icon {
-    font-size: 18px;
-  }
-
-  .feature-text {
-    font-size: 13px;
+  .drawer-links li a {
+    font-size: 16px;
   }
 }

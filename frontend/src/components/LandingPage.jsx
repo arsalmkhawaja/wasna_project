@@ -150,9 +150,6 @@ const LandingPage = () => {
           <a href="about-us">About Us</a>
           <a href="contact-us">Contact Us</a>
         </div>
-        <p>
-          &copy; {new Date().getFullYear()} Wasna Palace. All rights reserved.
-        </p>
       </footer>
     </div>
   );
