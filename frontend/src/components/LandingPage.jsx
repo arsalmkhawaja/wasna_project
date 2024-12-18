@@ -35,64 +35,46 @@ const LandingPage = () => {
         />
       </Helmet>
 
-      {/* Navbar */}
-      <nav className="custom-navbar">
-        <div className="navbar-container">
-          <ul className="navbar-links left-links">
-            <li className="active">Home</li>
-            <li>Event </li>
-            <li>Wasna Palace</li>
-            <li>4D Restaurant</li>
-          </ul>
-          <div className="navbar-logo">
-            <img
-              src={require("../assets/wasna logo.png")}
-              w
-              alt="Wasna Palace Logo"
-            />
-          </div>
-          <ul className="navbar-links right-links">
-            <li>Pure</li>
-            <li>Harmony Vista</li>
-            <li>About Us</li>
-            <li>Contact Us</li>
-          </ul>
-        </div>
-      </nav>
-
       {/* Hero Section */}
       <section
         className="hero"
+        id="home"
         style={{ backgroundImage: `url(${require("../assets/img1.jpg")})` }}
       >
         <div className="hero-overlay">
           <h1 className="hero-title">Wasna Palace</h1>
           <p className="hero-subtitle">Make Your Event Memorable</p>
-          <a href="#contact" className="hero-button">
+          <a href="#contact-us" className="hero-button">
             Book Now
           </a>
         </div>
       </section>
 
       {/* Why Choose Us */}
-      <section className="why-choose-us">
-        <h2>Why Choose Us?</h2>
+      <section className="why-choose-us" id="why-choose-us">
         <div className="why-choose-us-container">
-          <p>
-            At Wasna Palace, we blend tradition with modern elegance to create
-            unforgettable events. Our state-of-the-art facilities, exceptional
-            service, and stunning ambiance ensure that every moment is perfect.
-          </p>
-          <img src={img2} alt="Decorated Tent" className="blur-on-hover" />
+          <img
+            src={img2}
+            alt="Decorated Tent"
+            className="no-enlarge-on-hover"
+          />
+          <div className="why-choose-us-content">
+            <h2>Why Choose Us?</h2>
+            <p>
+              At Wasna Palace, we blend tradition with modern elegance to create
+              unforgettable events. Our state-of-the-art facilities, exceptional
+              service, and stunning ambiance ensure that every moment is
+              perfect.
+            </p>
+          </div>
         </div>
       </section>
 
       {/* Services */}
-      <section className="services">
-        <h2>Our Services</h2>
+      <section className="services" id="services">
         <div className="services-container">
-          <img src={img3} alt="Decorated Table" className="blur-on-hover" />
-          <div>
+          <div className="services-content">
+            <h2>Our Services</h2>
             <p>Our comprehensive event management services include:</p>
             <ul>
               <li>Customized Event Planning</li>
@@ -102,11 +84,17 @@ const LandingPage = () => {
             </ul>
             <button className="event-management-button">Learn More →</button>
           </div>
+          <img
+            src={img3}
+            alt="Decorated Table"
+            className="no-enlarge-on-hover"
+          />
         </div>
       </section>
 
       {/* Features */}
-      <section className="features">
+      <section className="features" id="features">
+        <h2>Features</h2>
         <div className="features-grid">
           <div className="feature-item">
             <span className="feature-icon">🎉</span>
@@ -135,7 +123,7 @@ const LandingPage = () => {
             center={position}
             zoom={13}
             scrollWheelZoom={false}
-            style={{ width: "100%", height: "400px" }}
+            style={{ width: "100%", height: "100%" }}
           >
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -151,20 +139,20 @@ const LandingPage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="footer" id="contact">
+      <footer className="footer" id="contact-us">
+        <div className="footer-links">
+          <a href="home">Home</a>
+          <a href="event-complex">Event Complex</a>
+          <a href="wasna-palace">Wasna Palace</a>
+          <a href="restaurant">4D Restaurant</a>
+          <a href="pure">Pure</a>
+          <a href="harmony-vista">Harmony Vista</a>
+          <a href="about-us">About Us</a>
+          <a href="contact-us">Contact Us</a>
+        </div>
         <p>
           &copy; {new Date().getFullYear()} Wasna Palace. All rights reserved.
         </p>
-        <div className="footer-links">
-          <a href="#home">Home</a>
-          <a href="#event-complex">Event Complex</a>
-          <a href="#wasna-palace">Wasna Palace</a>
-          <a href="#4d-restaurant">4D Restaurant</a>
-          <a href="#pure">Pure</a>
-          <a href="#harmony-vista">Harmony Vista</a>
-          <a href="#about-us">About Us</a>
-          <a href="#contact-us">Contact Us</a>
-        </div>
       </footer>
     </div>
   );

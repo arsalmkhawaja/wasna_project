@@ -1,56 +1,67 @@
 import React from "react";
+import "../styles/LandingPage.css";
 
 const Footer = () => {
   const footerStyle = {
-    backgroundColor: '#fff', // White background
-    padding: '20px 50px', // Padding around the content
-    textAlign: 'center', // Center align all text
-    borderTop: '2px solid #d4a373', // Gold border at the top
-    color: '#333', // Dark grey text color for visibility
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
+    backgroundColor: "#fff", // White background
+    padding: "20px 50px", // Padding around the content
+    textAlign: "center", // Center align all text
+    borderTop: "2px solid #d4a373", // Gold border at the top
+    color: "#333", // Dark grey text color for visibility
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   };
 
   const h2Style = {
-    fontSize: '24px',
-    fontWeight: 'bold',
-    color: '#b55850', // Dark gold color
-    marginBottom: '10px',
-    flex: '1 0 100%', // Take full width to ensure it breaks line
-    textAlign: 'center'
+    fontSize: "24px",
+    fontWeight: "bold",
+    color: "#b55850", // Dark gold color
+    marginBottom: "10px",
+    flex: "1 0 100%", // Take full width to ensure it breaks line
+    textAlign: "center",
   };
 
   const footerSectionsStyle = {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100%',
-    flexWrap: 'wrap'
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    flexWrap: "wrap",
   };
 
   const footerSectionStyle = {
-    margin: '5px 20px', // Adding horizontal margin for spacing
-    display: 'flex',
-    alignItems: 'center'
+    margin: "5px 20px", // Adding horizontal margin for spacing
+    display: "flex",
+    alignItems: "center",
   };
 
   const footerLegalStyle = {
-    marginTop: '10px',
-    fontSize: '14px',
-    color: '#666', // Lighter text color
-    width: '100%',
-    textAlign: 'center'
+    marginTop: "10px",
+    fontSize: "14px",
+    color: "#666", // Lighter text color
+    width: "100%",
+    textAlign: "center",
   };
 
   const legalLinksStyle = {
-    margin: '0 5px',
-    textDecoration: 'none',
-    color: '#d4a373', // Gold color for links
+    margin: "0 5px",
+    textDecoration: "none",
+    color: "#d4a373", // Gold color for links
   };
 
   return (
     <footer style={footerStyle}>
+      <div className="footer-links">
+        <a href="#home">Home</a>
+        <a href="#event-complex">Event Complex</a>
+        <a href="#wasna-palace">Wasna Palace</a>
+        <a href="#restaurant">4D Restaurant</a>
+        <a href="#pure">Pure</a>
+        <a href="#harmony-vista">Harmony Vista</a>
+        <a href="#about-us">About Us</a>
+        <a href="#contact-us">Contact Us</a>
+      </div>
       <h2 style={h2Style}>WASNA PALACE</h2>
       <div style={footerSectionsStyle}>
         <div style={footerSectionStyle}>
@@ -61,15 +72,27 @@ const Footer = () => {
         </div>
       </div>
       <div style={footerSectionsStyle}>
-        <a href="#" style={legalLinksStyle}>Facebook</a>
-        <a href="#" style={legalLinksStyle}>Instagram</a>
+        <a href="#" style={legalLinksStyle}>
+          Facebook
+        </a>
+        <a href="#" style={legalLinksStyle}>
+          Instagram
+        </a>
       </div>
       <div style={footerLegalStyle}>
         <p>© 2024 Wasna Palace. All rights reserved.</p>
         <div>
-          <a href="#" style={legalLinksStyle}>Privacy Policy</a> | 
-          <a href="#" style={legalLinksStyle}>Terms of Service</a> | 
-          <a href="#" style={legalLinksStyle}>Cookies</a>
+          <a href="#" style={legalLinksStyle}>
+            Privacy Policy
+          </a>{" "}
+          |
+          <a href="#" style={legalLinksStyle}>
+            Terms of Service
+          </a>{" "}
+          |
+          <a href="#" style={legalLinksStyle}>
+            Cookies
+          </a>
         </div>
       </div>
     </footer>
