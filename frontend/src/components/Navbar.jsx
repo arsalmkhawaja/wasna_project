@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import wasna_logo from "../assets/wasna logo 2.png";
+import wasna_logo from "../assets/wasna logo.png";
+import "../styles/LandingPage.css";
 
 const Navbar = () => {
   return (
