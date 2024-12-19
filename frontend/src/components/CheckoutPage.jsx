@@ -54,7 +54,7 @@ function Checkout() {
       // Here you can handle form submission, e.g., send data to the backend
       alert("Order placed successfully!");
       // Reset the form or navigate to a confirmation page
-      navigate("/");
+      navigate("/restaurant");
     }
   };
 
@@ -63,7 +63,7 @@ function Checkout() {
     display: "flex",
     flexWrap: "wrap",
     padding: "20px",
-    fontFamily: '"Lato", sans-serif',
+    fontFamily: '"Playfair Display", serif',
     minHeight: "100vh",
     background: "#fafafa",
     paddingTop: "100px",
@@ -106,6 +106,7 @@ function Checkout() {
   const errorStyle = {
     color: "red",
     fontSize: "0.9em",
+    fontFamily: '"Playfair Display", serif',
   };
 
   const paymentMethodsStyle = {
@@ -129,6 +130,7 @@ function Checkout() {
     fontSize: "1.1em",
     marginTop: "20px",
     transition: "background 0.3s ease",
+    fontFamily: '"Playfair Display", serif',
   };
 
   const placeOrderButtonHoverStyle = {
