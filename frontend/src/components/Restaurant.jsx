@@ -121,6 +121,7 @@ function Restaurant() {
     marginRight: "10px",
     cursor: "pointer",
     transition: "all 0.3s ease",
+    fontFamily: '"Playfair Display", serif',
   });
 
   const categoryButtonHoverStyle = {
@@ -387,10 +388,13 @@ function Restaurant() {
         {categories.map((cat) => (
           <button
             key={cat}
-            style={categoryButtonStyle(selectedCategory === cat)}
+            style={{
+              ...categoryButtonStyle(selectedCategory === cat),
+              ...(hoveredButton === cat ? categoryButtonHoverStyle : {}),
+            }}
             onClick={() => setSelectedCategory(cat)}
-            onMouseEnter={() => {}}
-            onMouseLeave={() => {}}
+            onMouseEnter={() => setHoveredButton(cat)}
+            onMouseLeave={() => setHoveredButton(null)}
           >
             {cat}
           </button>

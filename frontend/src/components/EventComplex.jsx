@@ -1,282 +1,202 @@
 import React, { useState } from "react";
-import { Helmet } from "react-helmet";
-import Navbar from "../components/Navbar"; // Import the Navbar component
-import {
-  Select,
-  MenuItem,
-  FormControl,
-  InputLabel,
-  Button,
-  Typography,
-} from "@mui/material";
+import image1 from "../assets/img1.jpg";
+import image2 from "../assets/img2.jpg";
+import image3 from "../assets/img3.jpg";
+import image4 from "../assets/img4.jpg";
+import image5 from "../assets/img5.jpg";
 
-const BookingPage = () => {
-  // Inline styles for the page
-  const styles = {
-    bookingPage: {
-      fontFamily: "Arial, sans-serif",
-      textAlign: "center",
-      padding: "20px",
-      minHeight: "100vh",
-      top: "1rem",
-      marginTop: "60px", // Adjust margin for space below the navbar
-    },
-    progressBarContainer: {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between",
-      width: "80%",
-      margin: "20px auto",
+const images = [
+  {
+    src: image1,
+    title: "Event Management 1",
+    description:
+      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Inventore qui ea architecto numquam recusandae quisquam debitis minus, perferendis assumenda. Fugiat odio tenetur nam numquam hic cupiditate omnis quod voluptates obcaecati?",
+  },
+  {
+    src: image2,
+    title: "Event Management 2",
+    description:
+      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Inventore qui ea architecto numquam recusandae quisquam debitis minus, perferendis assumenda. Fugiat odio tenetur nam numquam hic cupiditate omnis quod voluptates obcaecati?",
+  },
+  {
+    src: image3,
+    title: "Event Management 3",
+    description:
+      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Inventore qui ea architecto numquam recusandae quisquam debitis minus, perferendis assumenda. Fugiat odio tenetur nam numquam hic cupiditate omnis quod voluptates obcaecati?",
+  },
+  {
+    src: image4,
+    title: "Event Management 4",
+    description:
+      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Inventore qui ea architecto numquam recusandae quisquam debitis minus, perferendis assumenda. Fugiat odio tenetur nam numquam hic cupiditate omnis quod voluptates obcaecati?",
+  },
+  {
+    src: image5,
+    title: "Event Management 5",
+    description:
+      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Inventore qui ea architecto numquam recusandae quisquam debitis minus, perferendis assumenda. Fugiat odio tenetur nam numquam hic cupiditate omnis quod voluptates obcaecati?",
+  },
+];
+
+const EventComplex = () => {
+  const [activeIndex, setActiveIndex] = useState(null);
+
+  const pageStyle = {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "20px",
+    fontFamily: '"Playfair Display", serif',
+    minHeight: "100vh",
+  };
+
+  const galleryContainerStyle = {
+    border: "2px solid #ccc",
+    borderRadius: "10px",
+    borderColor: "#d4a373",
+    overflow: "hidden",
+    width: "90%",
+    maxWidth: "1500px",
+    marginTop: "20px",
+    padding: "20px",
+    boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+  };
+
+  const headingStyle = {
+    fontSize: "36px",
+    fontWeight: "bold",
+    marginBottom: "20px",
+    textAlign: "center",
+    color: "#d4a373",
+    fontFamily: '"Playfair Display", serif',
+  };
+
+  const innerContainerStyle = {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "stretch",
+    height: "500px",
+    gap: "10px",
+  };
+
+  const getItemStyle = (index) => {
+    const isActive = activeIndex === index;
+    const isBlur = activeIndex !== null && activeIndex !== index;
+
+    return {
       position: "relative",
-    },
-    progressLine: {
-      position: "absolute",
-      top: "35%",
-      left: "5%",
-      right: "5%",
-      height: "4px",
-      background: "#eaeaea",
-      zIndex: 0,
-    },
-    activeLine: (activeStep) => ({
-      position: "absolute",
-      top: "35%",
-      left: "5%",
-      height: "4px",
-      background: "#c00",
-      zIndex: 1,
-      width: `${31 * (activeStep - 1)}%`, // Dynamically update width based on step
-    }),
-    stepContainer: {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      position: "relative",
-      zIndex: 2,
-    },
-    stepCircle: (isActive) => ({
-      width: "40px",
-      height: "40px",
-      borderRadius: "50%",
-      background: isActive ? "#c00" : "#eaeaea",
-      color: isActive ? "#fff" : "#aaa",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      fontWeight: "bold",
-      border: isActive ? "2px solid #c00" : "2px solid #ccc",
-    }),
-    stepLabel: (isActive) => ({
-      fontSize: "12px",
-      fontWeight: isActive ? "bold" : "normal",
-      color: isActive ? "#c00" : "#aaa",
-      marginTop: "8px",
-    }),
-    heading: {
-      fontSize: "2rem",
-      margin: "20px 0",
-      fontWeight: "bold",
-      color: "#b8860b", // Gold color
-    },
-    form: {
-      display: "inline-block",
-      width: "300px",
-    },
-    formGroup: {
-      margin: "20px 0",
-      textAlign: "left",
-      width: "100%",
-    },
-    formControl: {
-      width: "100%",
-      textAlign: "left",
-    },
-    button: {
-      width: "100%",
-      padding: "10px",
-      background: "#c00",
-      color: "#fff",
-      border: "none",
-      borderRadius: "4px",
+      flex: isActive ? 3 : 1,
+      backgroundImage: `url(${images[index].src})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      transition: "flex 0.5s ease, filter 0.5s ease",
       cursor: "pointer",
-      fontWeight: "bold",
-    },
+      filter: isBlur ? "blur(4px)" : "none",
+      zIndex: isActive ? 2 : 1,
+      display: "flex",
+      alignItems: "flex-end",
+      justifyContent: "center",
+      borderRadius: "5px",
+      overflow: "hidden",
+    };
   };
 
-  // State for dropdown values
-  const [activeStep, setActiveStep] = useState(1); // Track the current step
-  const [formData, setFormData] = useState({
-    eventType: "",
-    venue: "",
-    date: "",
-    foodMenu: "",
-    decor: "",
-  });
-
-  // Handle step navigation
-  const handleNext = () => {
-    if (activeStep < 4) setActiveStep((prev) => prev + 1);
+  const overlayStyle = {
+    position: "absolute",
+    bottom: "20px",
+    left: "20px",
+    color: "#d4a373",
+    textShadow: "1px 1px 5px rgba(0, 0, 0, 0.7)",
+    maxWidth: "80%",
+    backgroundColor: "rgba(0, 31, 63, 0.8)",
+    padding: "10px",
+    borderRadius: "5px",
   };
 
-  const handleBack = () => {
-    if (activeStep > 1) setActiveStep((prev) => prev - 1);
+  const imageTextStyle = {
+    textAlign: "center",
+    color: "#d4a373",
+    fontSize: "18px",
+    marginTop: "10px",
+    fontFamily: '"Playfair Display", serif',
   };
 
-  const handleChange = (field, value) => {
-    setFormData({ ...formData, [field]: value });
+  const buttonStyle = {
+    padding: "10px 20px",
+    backgroundColor: "#b55850",
+    border: "none",
+    cursor: "pointer",
+    fontSize: "14px",
+    transition: "background-color 0.3s ease",
+    borderRadius: "3px",
+    fontFamily: '"Playfair Display", serif',
   };
 
-  const renderForm = () => {
-    switch (activeStep) {
-      case 1:
-        return (
-          <>
-            <FormControl style={styles.formControl}>
-              <InputLabel>Select Event Type</InputLabel>
-              <Select
-                value={formData.eventType}
-                onChange={(e) => handleChange("eventType", e.target.value)}
-              >
-                <MenuItem value="Wedding">Wedding</MenuItem>
-                <MenuItem value="Birthday">Birthday</MenuItem>
-                <MenuItem value="Corporate">Corporate</MenuItem>
-              </Select>
-            </FormControl>
-            <FormControl style={styles.formControl}>
-              <InputLabel>Select Venue</InputLabel>
-              <Select
-                value={formData.venue}
-                onChange={(e) => handleChange("venue", e.target.value)}
-              >
-                <MenuItem value="Hall A">Hall A</MenuItem>
-                <MenuItem value="Hall B">Hall B</MenuItem>
-                <MenuItem value="Hall C">Hall C</MenuItem>
-              </Select>
-            </FormControl>
-            <FormControl style={styles.formControl}>
-              <InputLabel>Choose Date(s)</InputLabel>
-              <Select
-                value={formData.date}
-                onChange={(e) => handleChange("date", e.target.value)}
-              >
-                <MenuItem value="2024-01-01">1st January 2024</MenuItem>
-                <MenuItem value="2024-02-15">15th February 2024</MenuItem>
-                <MenuItem value="2024-03-20">20th March 2024</MenuItem>
-              </Select>
-            </FormControl>
-          </>
-        );
-      case 2:
-        return (
-          <FormControl style={styles.formControl}>
-            <InputLabel>Food Menu</InputLabel>
-            <Select
-              value={formData.foodMenu}
-              onChange={(e) => handleChange("foodMenu", e.target.value)}
-            >
-              <MenuItem value="Vegetarian">Vegetarian</MenuItem>
-              <MenuItem value="Non-Vegetarian">Non-Vegetarian</MenuItem>
-              <MenuItem value="Mixed">Mixed</MenuItem>
-            </Select>
-          </FormControl>
-        );
-      case 3:
-        return (
-          <FormControl style={styles.formControl}>
-            <InputLabel>Decor Theme</InputLabel>
-            <Select
-              value={formData.decor}
-              onChange={(e) => handleChange("decor", e.target.value)}
-            >
-              <MenuItem value="Traditional">Traditional</MenuItem>
-              <MenuItem value="Modern">Modern</MenuItem>
-              <MenuItem value="Rustic">Rustic</MenuItem>
-            </Select>
-          </FormControl>
-        );
-      case 4:
-        return (
-          <Typography variant="h6">
-            Please review your details and confirm your booking:
-            <ul>
-              <li>Event Type: {formData.eventType}</li>
-              <li>Venue: {formData.venue}</li>
-              <li>Date: {formData.date}</li>
-              <li>Food Menu: {formData.foodMenu}</li>
-              <li>Decor Theme: {formData.decor}</li>
-            </ul>
-          </Typography>
-        );
-      default:
-        return null;
-    }
+  const buttonHoverStyle = {
+    backgroundColor: "#ffffff",
   };
 
   return (
-    <div>
-      {/* Navbar Component */}
-      <Navbar />
-
-      {/* Booking Page Content */}
-      <div style={styles.bookingPage}>
-        {/* SEO Meta Tags */}
-        <Helmet>
-          <title>Wasna Palace - Make Your Event Memorable</title>
-          <meta
-            name="description"
-            content="Plan your next big event at Wasna Palace. Offering premium event management with world-class facilities."
-          />
-        </Helmet>
-        <h1 style={styles.heading}>Book Now</h1>
-
-        {/* Progress Bar */}
-        <div style={styles.progressBarContainer}>
-          {/* Background Line */}
-          <div style={styles.progressLine}></div>
-          {/* Active Line */}
-          <div style={styles.activeLine(activeStep)}></div>
-
-          {/* Steps */}
-          {["Choose Event", "Food Menu", "Decor", "Confirmation"].map(
-            (label, index) => {
-              const isActive = index + 1 === activeStep;
-              return (
-                <div key={index} style={styles.stepContainer}>
-                  <div style={styles.stepCircle(isActive)}>{index + 1}</div>
-                  <div style={styles.stepLabel(isActive)}>{label}</div>
+    <div style={pageStyle}>
+      <h1 style={headingStyle}>Event Complex</h1>
+      <div style={galleryContainerStyle}>
+        <div style={innerContainerStyle}>
+          {images.map((image, index) => (
+            <div
+              key={index}
+              style={getItemStyle(index)}
+              onMouseEnter={() => setActiveIndex(index)}
+              onMouseLeave={() => setActiveIndex(null)}
+            >
+              {activeIndex === index && (
+                <div style={overlayStyle}>
+                  <h2>{image.title}</h2>
+                  <p>{image.description}</p>
+                  <button
+                    style={buttonStyle}
+                    onMouseEnter={(e) =>
+                      (e.target.style.backgroundColor =
+                        buttonHoverStyle.backgroundColor)
+                    }
+                    onMouseLeave={(e) =>
+                      (e.target.style.backgroundColor =
+                        buttonStyle.backgroundColor)
+                    }
+                  >
+                    <a href="wasna-palace">Learn More</a>
+                  </button>
                 </div>
-              );
-            }
-          )}
+              )}
+            </div>
+          ))}
         </div>
-
-        {/* Form Section */}
-        <form style={styles.form}>
-          {renderForm()}
-          <div style={{ marginTop: "20px" }}>
-            {activeStep > 1 && (
-              <Button
-                variant="contained"
-                onClick={handleBack}
-                style={{ marginRight: "10px" }}
-              >
-                Back
-              </Button>
-            )}
-            {activeStep < 4 ? (
-              <Button variant="contained" color="primary" onClick={handleNext}>
-                Next →
-              </Button>
-            ) : (
-              <Button variant="contained" color="success">
-                Confirm
-              </Button>
-            )}
-          </div>
-        </form>
+        {/* Add text below each image */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginTop: "10px",
+          }}
+        >
+          {images.map((image, index) => (
+            <p
+              key={index}
+              style={{
+                ...imageTextStyle,
+                visibility:
+                  activeIndex === index || activeIndex === null
+                    ? "visible"
+                    : "hidden",
+              }}
+            >
+              {image.title}
+            </p>
+          ))}
+        </div>
       </div>
     </div>
   );
 };
 
-export default BookingPage;
+export default EventComplex;

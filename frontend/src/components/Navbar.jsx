@@ -34,7 +34,7 @@ const Navbar = () => {
             </li>
             <li>
               <NavLink
-                to="/event-management"
+                to="/event-complex"
                 className={({ isActive }) => (isActive ? "active" : undefined)}
               >
                 Event Complex
@@ -42,7 +42,7 @@ const Navbar = () => {
             </li>
             <li>
               <NavLink
-                to="/event-complex"
+                to="/wasna-palace"
                 className={({ isActive }) => (isActive ? "active" : undefined)}
               >
                 Wasna Palace
