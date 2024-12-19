@@ -1,83 +1,21 @@
-import React, { useState } from "react";
+// Restaurant.js
+import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { FaShoppingCart } from "react-icons/fa";
-import biryaniImage from "../assets/Biriyani.png";
-import milk from "../assets/Milk.png";
-import chicken from "../assets/Chicken.png";
-
-const productsData = [
-  {
-    id: 1,
-    name: "Chicken Biryani",
-    category: "Desi",
-    description: "basmati rice, tender spicy chicken, potatoes",
-    price: 1099,
-    image: biryaniImage,
-  },
-  {
-    id: 2,
-    name: "Chicken Biryani",
-    category: "Chinese",
-    description: "basmati rice, tender spicy chicken, potatoes",
-    price: 1099,
-    image: biryaniImage,
-  },
-  {
-    id: 3,
-    name: "Chicken Biryani",
-    category: "Continental",
-    description: "basmati rice, tender spicy chicken, potatoes",
-    price: 1099,
-    image: biryaniImage,
-  },
-  {
-    id: 4,
-    name: "Chicken Biryani",
-    category: "Beverages",
-    description: "basmati rice, tender spicy chicken, potatoes",
-    price: 1099,
-    image: biryaniImage,
-  },
-  {
-    id: 5,
-    name: "Milk",
-    category: "African-Amarican",
-    description: "Now you don't have to leave the house",
-    price: "350",
-    image: milk,
-  },
-  {
-    id: 6,
-    name: "Fried Chicken",
-    category: "African-Amarican",
-    description: "For that Bigger Linkin Gooooood!!",
-    price: "1350",
-    image: chicken,
-  },
-  {
-    id: 7,
-    name: "Chicken Biryani",
-    category: "Desi",
-    description: "basmati rice, tender spicy chicken, potatoes",
-    price: 1099,
-    image: biryaniImage,
-  },
-  {
-    id: 8,
-    name: "Chicken Biryani",
-    category: "Desi",
-    description: "basmati rice, tender spicy chicken, potatoes",
-    price: 1099,
-    image: biryaniImage,
-  },
-];
+import axios from "axios";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 function Restaurant() {
+  const [products, setProducts] = useState([]); // Replaces productsData
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [cart, setCart] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [hoveredButton, setHoveredButton] = useState(null);
   const [activeButton, setActiveButton] = useState(null);
+  const [loading, setLoading] = useState(true); // Loading state
+  const [error, setError] = useState(null); // Error state
+
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const categories = [
     "All",
@@ -85,25 +23,44 @@ function Restaurant() {
     "Chinese",
     "Continental",
     "Beverages",
-    "African-Amarican",
+    "African-American", // Corrected spelling
   ];
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get("http://localhost:4000/api/v1/"); // Adjust the base URL as needed
+        setProducts(response.data.data); // Assuming the backend sends { success: true, data: [...] }
+        setLoading(false);
+      } catch (err) {
+        console.error("Error fetching products:", err);
+        setError("Failed to load products. Please try again later.");
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   const filteredProducts =
     selectedCategory === "All"
-      ? productsData
-      : productsData.filter((p) => p.category === selectedCategory);
+      ? products
+      : products.filter((p) => p.category === selectedCategory);
 
   const addToCart = (product) => {
     setCart((prevCart) => {
-      const existingItem = prevCart.find((item) => item.id === product.id);
+      const existingItem = prevCart.find((item) => item.id === product._id);
       if (existingItem) {
         return prevCart.map((item) =>
-          item.id === product.id
+          item.id === product._id
             ? { ...item, quantity: item.quantity + 1 }
             : item
         );
       } else {
-        return [...prevCart, { ...product, quantity: 1 }];
+        return [
+          ...prevCart,
+          { ...product, quantity: 1, id: product._id }, // Ensure unique identifier
+        ];
       }
     });
   };
@@ -140,7 +97,6 @@ function Restaurant() {
 
   // Inline styles
   const appContainerStyle = {
-    padding: "20px",
     minHeight: "100vh",
     background: "#fafafa",
     padding: "20px",
@@ -390,6 +346,27 @@ function Restaurant() {
     cursor: "pointer",
   };
 
+  // Additional styles for the Checkout button
+  const checkoutButtonStyle = {
+    background: "#b10101",
+    color: "#fff",
+    border: "none",
+    borderRadius: "4px",
+    padding: "12px",
+    cursor: "pointer",
+    width: "100%",
+    fontSize: "1.1em",
+    marginTop: "20px",
+    transition: "background 0.3s ease",
+  };
+
+  const checkoutButtonHoverStyle = {
+    background: "#d40f0f",
+  };
+
+  // State to handle hover effect on Checkout button
+  const [isCheckoutHovered, setIsCheckoutHovered] = useState(false);
+
   return (
     <div style={appContainerStyle}>
       <Helmet>
@@ -411,9 +388,9 @@ function Restaurant() {
           <button
             key={cat}
             style={categoryButtonStyle(selectedCategory === cat)}
+            onClick={() => setSelectedCategory(cat)}
             onMouseEnter={() => {}}
             onMouseLeave={() => {}}
-            onClick={() => setSelectedCategory(cat)}
           >
             {cat}
           </button>
@@ -433,48 +410,59 @@ function Restaurant() {
         </div>
       </div>
 
-      {/* Product Listing */}
-      <div style={productGridStyle}>
-        {filteredProducts.map((product) => {
-          const isHovered = hoveredButton === product.id;
-          const isActiveBtn = activeButton === product.id;
+      {/* Loading and Error States */}
+      {loading ? (
+        <p>Loading products...</p>
+      ) : error ? (
+        <p style={{ color: "red" }}>{error}</p>
+      ) : (
+        /* Product Listing */
+        <div style={productGridStyle}>
+          {filteredProducts.map((product) => {
+            const isHovered = hoveredButton === product._id;
+            const isActiveBtn = activeButton === product._id;
 
-          return (
-            <div key={product.id} style={{ ...productCardStyle }}>
-              <div style={heartIconContainerStyle}>
-                <img
-                  src="https://via.placeholder.com/24?text=♥"
-                  alt="Favorite"
-                  style={heartIconStyle}
-                />
-              </div>
-              <img
-                src={product.image}
-                alt={product.name}
-                style={productImageStyle}
-              />
-              <h3 style={productTitleStyle}>{product.name}</h3>
-              <p style={productDescriptionStyle}>{product.description}</p>
-              <p style={productPriceStyle}>RS. {product.price}</p>
-              <button
-                style={addToCartButtonStyle(isHovered, isActiveBtn)}
-                onClick={() => {
-                  addToCart(product);
+            return (
+              <div
+                key={product._id}
+                style={{
+                  ...productCardStyle,
+                  ...(isHovered ? productCardHoverStyle : {}),
                 }}
-                onMouseEnter={() => setHoveredButton(product.id)}
-                onMouseLeave={() => {
-                  setHoveredButton(null);
-                  setActiveButton(null);
-                }}
-                onMouseDown={() => setActiveButton(product.id)}
-                onMouseUp={() => setActiveButton(null)}
               >
-                +
-              </button>
-            </div>
-          );
-        })}
-      </div>
+                <div style={heartIconContainerStyle}>
+                  <img
+                    src="https://via.placeholder.com/24?text=♥"
+                    alt="Favorite"
+                    style={heartIconStyle}
+                  />
+                </div>
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  style={productImageStyle}
+                />
+                <h3 style={productTitleStyle}>{product.name}</h3>
+                <p style={productDescriptionStyle}>{product.description}</p>
+                <p style={productPriceStyle}>RS. {product.price}</p>
+                <button
+                  style={addToCartButtonStyle(isHovered, isActiveBtn)}
+                  onClick={() => addToCart(product)}
+                  onMouseEnter={() => setHoveredButton(product._id)}
+                  onMouseLeave={() => {
+                    setHoveredButton(null);
+                    setActiveButton(null);
+                  }}
+                  onMouseDown={() => setActiveButton(product._id)}
+                  onMouseUp={() => setActiveButton(null)}
+                >
+                  Add to cart
+                </button>
+              </div>
+            );
+          })}
+        </div>
+      )}
 
       {/* Cart Drawer */}
       <div style={cartDrawerStyle}>
@@ -499,36 +487,65 @@ function Restaurant() {
           {cart.length === 0 && <p>No items in cart.</p>}
           {cart.map((item) => (
             <div key={item.id} style={cartItemStyle}>
-              <h4 style={cartItemTitleStyle}>{item.name}</h4>
-              <p style={cartItemPriceStyle}>Price: RS. {item.price}</p>
-              <div style={cartItemControlsStyle}>
+              {/* Display Product Image */}
+              <img
+                src={item.image}
+                alt={item.name}
+                style={{
+                  width: "50px",
+                  height: "50px",
+                  objectFit: "cover",
+                  marginRight: "10px",
+                }}
+              />
+              <div style={{ display: "inline-block", verticalAlign: "top" }}>
+                <h4 style={cartItemTitleStyle}>{item.name}</h4>
+                <p style={cartItemPriceStyle}>Price: RS. {item.price}</p>
+                <div style={cartItemControlsStyle}>
+                  <button
+                    style={quantityButtonStyle}
+                    onClick={() => decrementQuantity(item.id)}
+                  >
+                    -
+                  </button>
+                  <span style={itemQuantityStyle}>{item.quantity}</span>
+                  <button
+                    style={quantityButtonStyle}
+                    onClick={() => incrementQuantity(item.id)}
+                  >
+                    +
+                  </button>
+                </div>
                 <button
-                  style={quantityButtonStyle}
-                  onClick={() => decrementQuantity(item.id)}
+                  style={removeItemButtonStyle}
+                  onClick={() => removeFromCart(item.id)}
                 >
-                  -
-                </button>
-                <span style={itemQuantityStyle}>{item.quantity}</span>
-                <button
-                  style={quantityButtonStyle}
-                  onClick={() => incrementQuantity(item.id)}
-                >
-                  +
+                  Remove
                 </button>
               </div>
-              <button
-                style={removeItemButtonStyle}
-                onClick={() => removeFromCart(item.id)}
-              >
-                Remove
-              </button>
             </div>
           ))}
 
           {cart.length > 0 && (
-            <div style={cartTotalStyle}>
-              <h3 style={{ margin: 0 }}>Total: RS. {totalPrice}</h3>
-            </div>
+            <>
+              <div style={cartTotalStyle}>
+                <h3 style={{ margin: 0 }}>Total: RS. {totalPrice}</h3>
+              </div>
+              {/* Checkout Button */}
+              <button
+                style={{
+                  ...checkoutButtonStyle,
+                  ...(isCheckoutHovered ? checkoutButtonHoverStyle : {}),
+                }}
+                onClick={() =>
+                  navigate("/checkout", { state: { cart, totalPrice } })
+                }
+                onMouseEnter={() => setIsCheckoutHovered(true)}
+                onMouseLeave={() => setIsCheckoutHovered(false)}
+              >
+                Proceed to Checkout
+              </button>
+            </>
           )}
         </div>
       </div>
