@@ -42,9 +42,9 @@ const LandingPage = () => {
         style={{ backgroundImage: `url(${require("../assets/img1.jpg")})` }}
       >
         <div className="hero-overlay">
-          <h1 className="hero-title">Wasna Palace</h1>
+          <h1 className="hero-title">WASNA PALACE</h1>
           <p className="hero-subtitle">Make Your Event Memorable</p>
-          <a href="#contact-us" className="hero-button">
+          <a href="wasna-palace" className="hero-button">
             Book Now
           </a>
         </div>
@@ -59,12 +59,18 @@ const LandingPage = () => {
             className="no-enlarge-on-hover"
           />
           <div className="why-choose-us-content">
-            <h2>Why Choose Us?</h2>
+            <h2>WHY CHOOSE US?</h2>
             <p>
               At Wasna Palace, we blend tradition with modern elegance to create
               unforgettable events. Our state-of-the-art facilities, exceptional
               service, and stunning ambiance ensure that every moment is
-              perfect.
+              perfect. Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+              Est commodi vitae dignissimos reprehenderit impedit nulla a in!
+              Similique iure omnis reprehenderit sequi, illo eveniet dolor iusto
+              delectus dolorem rem ad. Lorem ipsum dolor sit amet consectetur
+              adipisicing elit. Minima quam voluptatem a nam fugiat. Provident
+              laborum unde et praesentium aliquid nulla odio, non quas. Rerum
+              minus iure accusamus enim dolorum!
             </p>
           </div>
         </div>
@@ -74,15 +80,18 @@ const LandingPage = () => {
       <section className="services" id="services">
         <div className="services-container">
           <div className="services-content">
-            <h2>Our Services</h2>
-            <p>Our comprehensive event management services include:</p>
-            <ul>
-              <li>Customized Event Planning</li>
-              <li>Decor and Ambiance Design</li>
-              <li>Catering and Menu Selection</li>
-              <li>Entertainment and Music</li>
-            </ul>
-            <button className="event-management-button">Learn More →</button>
+            <h2>OUR SERVICES</h2>
+            <div className="services-content-list">
+              <p>Our comprehensive event management services include:</p>
+              <ul>
+                <li>Customized Event Planning</li>
+                <li>Decor and Ambiance Design</li>
+                <li>Catering and Menu Selection</li>
+                <li>Entertainment and Music</li>
+              </ul>
+            </div>
+
+            <a href="event-complex" className="event-management-button">Learn More →</a>
           </div>
           <img
             src={img3}
@@ -117,7 +126,7 @@ const LandingPage = () => {
 
       {/* Location Section */}
       <section className="location" id="location">
-        <h2>Our Location</h2>
+        <h2>LOCATION</h2>
         <div className="map-wrapper">
           <MapContainer
             center={position}
