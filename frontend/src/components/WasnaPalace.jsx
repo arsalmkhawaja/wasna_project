@@ -18,8 +18,7 @@ const WasnaPalace = () => {
       textAlign: "center",
       padding: "20px",
       minHeight: "100vh",
-      top: "1rem",
-      marginTop: "60px", // Adjust margin for space below the navbar
+      marginTop: "100px",
     },
     progressBarContainer: {
       display: "flex",
@@ -75,10 +74,10 @@ const WasnaPalace = () => {
       fontFamily: '"Playfair Display", serif',
     }),
     heading: {
-      fontSize: "2rem",
+      fontSize: "36px",
       margin: "20px 0",
       fontWeight: "bold",
-      color: "#b8860b", // Gold color
+      color: "#d4a373", // Gold color
       fontFamily: '"Playfair Display", serif',
     },
     form: {
