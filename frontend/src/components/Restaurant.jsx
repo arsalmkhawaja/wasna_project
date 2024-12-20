@@ -99,11 +99,10 @@ function Restaurant() {
   const appContainerStyle = {
     minHeight: "100vh",
     background: "#fafafa",
-    padding: "20px",
     position: "relative",
     minHeight: "100vh",
     fontFamily: '"Lato", sans-serif',
-    paddingTop: "100px", // Increase this value as needed
+    paddingTop: "120px", 
   };
 
   const categoryTabsStyle = {
@@ -111,7 +110,15 @@ function Restaurant() {
     display: "flex",
     flexWrap: "wrap",
   };
-
+  const heading = {
+    display: "flex",
+    fontSize: "36px",
+    margin: "20px 0",
+    fontWeight: "bold",
+    color: "#d4a373",
+    fontFamily: '"Playfair Display", serif',
+    justifyContent: "center",
+  };
   const categoryButtonStyle = (isActive) => ({
     background: isActive ? "#b10101" : "#fff",
     color: isActive ? "#fff" : "#000",
@@ -131,11 +138,11 @@ function Restaurant() {
 
   const cartIconContainerStyle = {
     position: "fixed",
-    top: "20px",
+    top: "100px",
     right: "20px",
     cursor: "pointer",
     zIndex: 101,
-    paddingTop: "100px", // Increase this value as needed
+    paddingTop: "100px",
   };
 
   const cartIconStyle = {
@@ -382,6 +389,7 @@ function Restaurant() {
           rel="stylesheet"
         />
       </Helmet>
+      <h1 style={heading}>Restaurant</h1>
 
       {/* Category Tabs */}
       <div style={categoryTabsStyle}>

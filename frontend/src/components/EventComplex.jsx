@@ -45,10 +45,10 @@ const EventComplex = () => {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "center",
     padding: "20px",
     fontFamily: '"Playfair Display", serif',
     minHeight: "100vh",
+    marginTop: "100px",
   };
 
   const galleryContainerStyle = {
