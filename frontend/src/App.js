@@ -10,6 +10,7 @@ import RestaurantAdd from "./components/AddRestaurant";
 import Checkout from "./components/CheckoutPage";
 import EventComplex from "./components/EventComplex";
 import Login from "./components/Login";
+import Profile from "./components/Profile";
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
           <Route path="checkout" element={<Checkout />} />
           <Route path="event-complex" element={<EventComplex />} />
           <Route path="signup&login" element={<Login />} />
+          <Route path="profile" element={<Profile />} />
         </Routes>
       </main>
       <Footer />

@@ -30,20 +30,13 @@ const Navbar = () => {
     setDrawerOpen(false);
   };
 
-  // Function to handle login/logout toggle
-  const toggleLogin = () => {
-    setIsLoggedIn(!isLoggedIn);
-  };
-
   // Handlers for Login and Signup navigation
   const handleLoginClick = () => {
-    // Store the current page (location) in state to redirect after login
     navigate("/signup&login", { state: { from: location } }); // Pass the current page URL
   };
 
-  const handleSignupClick = () => {
-    // Store the current page (location) in state to redirect after signup
-    navigate("/signup&login", { state: { from: location } });
+  const handleProfileClick = () => {
+    navigate("/profile");
   };
 
   // Function to handle sign out
@@ -144,20 +137,25 @@ const Navbar = () => {
             {drawerOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
           </div>
 
-          {/* User Login/Logout Button */}
+          {/* User Options: Logout and Profile */}
           <div className="navbar-user">
-            {/* On Mobile: Show login button inside drawer only */}
-            <div className={`auth-buttons ${drawerOpen ? 'visible' : ''}`}>
-              {isLoggedIn ? (
+            {isLoggedIn ? (
+              <>
                 <button onClick={handleSignOut} className="logout-button">
                   Sign Out
                 </button>
-              ) : (
-                <button className="login-button" onClick={handleLoginClick}>
-                  Login
-                </button>
-              )}
-            </div>
+                <FaUserCircle
+                  className="profile-icon"
+                  size={32}
+                  onClick={handleProfileClick}
+                  title="Profile"
+                />
+              </>
+            ) : (
+              <button className="login-button" onClick={handleLoginClick}>
+                Login
+              </button>
+            )}
           </div>
         </div>
       </nav>
@@ -243,19 +241,6 @@ const Navbar = () => {
             >
               Contact Us
             </NavLink>
-          </li>
-
-          {/* Add Login/Logout Button inside the Drawer for Mobile */}
-          <li>
-            {isLoggedIn ? (
-              <button onClick={handleSignOut} className="logout-button">
-                Sign Out
-              </button>
-            ) : (
-              <button className="login-button" onClick={handleLoginClick}>
-                Login
-              </button>
-            )}
           </li>
         </ul>
       </div>
