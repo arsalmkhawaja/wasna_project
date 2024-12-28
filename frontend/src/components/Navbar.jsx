@@ -21,7 +21,12 @@ const Navbar = () => {
     <>
       <nav className="custom-navbar">
         <div className="navbar-container">
-          {/* Left Links (Visible on Desktop) */}
+          {/* Logo */}
+          <div className="navbar-logo">
+            <NavLink to="/">
+              <img src={wasna_logo} alt="Wasna Palace Logo" />
+            </NavLink>
+          </div>
           <ul className="navbar-links left-links">
             <li>
               <NavLink
@@ -48,25 +53,15 @@ const Navbar = () => {
                 Wasna Palace
               </NavLink>
             </li>
-            <li>
+            {/* <li>
               <NavLink
                 to="/restaurant"
                 className={({ isActive }) => (isActive ? "active" : undefined)}
               >
                 4D Restaurant
               </NavLink>
-            </li>
-          </ul>
+            </li> */}
 
-          {/* Logo */}
-          <div className="navbar-logo">
-            <NavLink to="/">
-              <img src={wasna_logo} alt="Wasna Palace Logo" />
-            </NavLink>
-          </div>
-
-          {/* Right Links (Visible on Desktop) */}
-          <ul className="navbar-links right-links">
             <li>
               <NavLink
                 to="/wasna-pure"

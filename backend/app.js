@@ -7,7 +7,8 @@ const cors = require("cors");
 const app = express();
 
 // Importing routes
-const restaurant = require("./routes/Restaurant");
+const user = require("./routes/User");
+const reciept = require("./routes/Reciept");
 
 // Middleware
 app.use(express.json());
@@ -15,7 +16,8 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use(cors());
 
 // API Routes
-app.use("/api/v1", restaurant);
+app.use("/api/v1", user);
+app.use("/api/v2", reciept);
 
 // Server startup
 const port = process.env.PORT || 4000;
