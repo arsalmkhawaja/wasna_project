@@ -451,7 +451,7 @@ a {
   }
 
   .drawer-links li a {
-    font-size: 16px;
+    font-size: 16px;  
   }
 }
 
@@ -612,4 +612,45 @@ a {
 .logout-button:hover {
   background-color: var(--accent-color);
   color: var(--text-light);
+}
+.auth-buttons {
+  display: none; /* Hidden outside the drawer */
+}
+
+.drawer .auth-buttons {
+  display: block; /* Show inside the drawer */
+}
+
+/* Show login buttons only when the drawer is open */
+.drawer .login-button, .drawer .logout-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Make sure the drawer is properly styled */
+.drawer.open {
+  display: block; /* Show drawer when open */
+}
+
+/* Make the drawer links visible only on smaller screens */
+.drawer-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  /* For larger screens, show the buttons outside the drawer */
+  .auth-buttons {
+    display: block;
+  }
+
+  .drawer {
+    display: none;
+  }
 }

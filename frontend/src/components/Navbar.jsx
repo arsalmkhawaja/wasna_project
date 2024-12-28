@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { NavLink, useNavigate, useLocation } from "react-router-dom"; // Import useLocation
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { FaBars, FaTimes, FaUserCircle } from "react-icons/fa"; // Adding User icon
 import wasna_logo from "../assets/wasna logo.png";
 import "../styles/LandingPage.css";
@@ -143,25 +143,21 @@ const Navbar = () => {
           <div className="hamburger" onClick={toggleDrawer}>
             {drawerOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
           </div>
+
           {/* User Login/Logout Button */}
           <div className="navbar-user">
-            {isLoggedIn ? (
-              <div className="user-menu">
-                <FaUserCircle size={24} className="user-icon" />
+            {/* On Mobile: Show login button inside drawer only */}
+            <div className={`auth-buttons ${drawerOpen ? 'visible' : ''}`}>
+              {isLoggedIn ? (
                 <button onClick={handleSignOut} className="logout-button">
                   Sign Out
                 </button>
-              </div>
-            ) : (
-              <div className="auth-buttons">
+              ) : (
                 <button className="login-button" onClick={handleLoginClick}>
                   Login
                 </button>
-                {/* <button className="signup-button" onClick={handleSignupClick}>
-                  Signup
-                </button> */}
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
       </nav>
@@ -247,6 +243,19 @@ const Navbar = () => {
             >
               Contact Us
             </NavLink>
+          </li>
+
+          {/* Add Login/Logout Button inside the Drawer for Mobile */}
+          <li>
+            {isLoggedIn ? (
+              <button onClick={handleSignOut} className="logout-button">
+                Sign Out
+              </button>
+            ) : (
+              <button className="login-button" onClick={handleLoginClick}>
+                Login
+              </button>
+            )}
           </li>
         </ul>
       </div>
