@@ -451,7 +451,7 @@ a {
   }
 
   .drawer-links li a {
-    font-size: 16px;
+    font-size: 16px;  
   }
 }
 
@@ -561,5 +561,96 @@ a {
 
   .drawer-links li a {
     font-size: 16px;
+  }
+}
+.navbar-user {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.auth-buttons{
+  display: flex;
+  gap: 30px;
+}
+.auth-buttons button {
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.auth-buttons button:hover {
+  background-color: var(--accent-color);
+}
+
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-icon {
+  color: var(--primary-color);
+}
+
+.logout-button {
+  background-color: transparent;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: var(--accent-color);
+  color: var(--text-light);
+}
+.auth-buttons {
+  display: none; /* Hidden outside the drawer */
+}
+
+.drawer .auth-buttons {
+  display: block; /* Show inside the drawer */
+}
+
+/* Show login buttons only when the drawer is open */
+.drawer .login-button, .drawer .logout-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Make sure the drawer is properly styled */
+.drawer.open {
+  display: block; /* Show drawer when open */
+}
+
+/* Make the drawer links visible only on smaller screens */
+.drawer-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  /* For larger screens, show the buttons outside the drawer */
+  .auth-buttons {
+    display: block;
+  }
+
+  .drawer {
+    display: none;
   }
 }
