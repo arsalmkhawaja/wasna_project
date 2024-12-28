@@ -9,6 +9,7 @@ import Restaurant from "./components/Restaurant";
 import RestaurantAdd from "./components/AddRestaurant";
 import Checkout from "./components/CheckoutPage";
 import EventComplex from "./components/EventComplex";
+import Login from "./components/Login";
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
           <Route path="add-restaurant" element={<RestaurantAdd />} />
           <Route path="checkout" element={<Checkout />} />
           <Route path="event-complex" element={<EventComplex />} />
+          <Route path="signup&login" element={<Login />} />
         </Routes>
       </main>
       <Footer />

@@ -41,15 +41,15 @@ const register = async (req, res) => {
 // Login Controller
 const login = async (req, res) => {
   try {
-    const { fullName, password } = req.body;
+    const { phoneNumber, password } = req.body;
 
-    if (!fullName || !password) {
+    if (!phoneNumber || !password) {
       return res
         .status(400)
-        .json({ msg: "Please provide fullName and password" });
+        .json({ msg: "Please provide phoneNumber and password" });
     }
 
-    const user = await User.findOne({ fullName });
+    const user = await User.findOne({ phoneNumber });
     if (!user) {
       return res.status(401).json({ msg: "Invalid Credentials" });
     }
@@ -62,9 +62,7 @@ const login = async (req, res) => {
     const token = jwt.sign(
       { id: user._id, name: user.fullName },
       process.env.JWT_SECRET,
-      {
-        expiresIn: "1d",
-      }
+      { expiresIn: "1d" }
     );
 
     res
