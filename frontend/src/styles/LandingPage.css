@@ -608,8 +608,21 @@ a {
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
+.login-button {
+  background-color: transparent;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
 
 .logout-button:hover {
+  background-color: var(--accent-color);
+  color: var(--text-light);
+}
+.login-button:hover {
   background-color: var(--accent-color);
   color: var(--text-light);
 }

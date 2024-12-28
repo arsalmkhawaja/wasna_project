@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom"; // Import useLocation and useNavigate
 import axios from "axios";
 
-const Login = () => {
+const Auth = () => {
   const [isLogin, setIsLogin] = useState(true); // Toggle between login and signup
   const [formData, setFormData] = useState({
     phoneNumber: "", // For both login and signup
@@ -159,6 +159,20 @@ const Login = () => {
                   style={styles.input}
                 />
               </div>
+              <div style={styles.inputGroup}>
+                <label htmlFor="password" style={styles.label}>
+                  Password
+                </label>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  required
+                  style={styles.input}
+                />
+              </div>
             </>
           )}
 
@@ -273,4 +287,4 @@ const styles = {
   },
 };
 
-export default Login;
+export default Auth;
