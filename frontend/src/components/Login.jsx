@@ -31,8 +31,8 @@ const Auth = () => {
     e.preventDefault();
 
     const url = isLogin
-      ? "https://wasna-backend.vercel.app/api/v1/login"
-      : "https://wasna-backend.vercel.app/api/v1/register"; // API URLs for login and signup
+      ? "http://localhost:4000/api/v1/login"
+      : "http://localhost:4000/api/v1/register"; // API URLs for login and signup
 
     const payload = isLogin
       ? {
