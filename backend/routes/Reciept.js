@@ -5,9 +5,7 @@ const authenticationMiddleware = require("../middleware/auth");
 
 // Routes for receipts (protected by authentication middleware)
 router.post("/", authenticationMiddleware, receiptController.createReceipt);
-router.get("/", authenticationMiddleware, receiptController.getAllReceipts);
-router.get("/:id", authenticationMiddleware, receiptController.getReceiptById);
-router.put("/:id", authenticationMiddleware, receiptController.updateReceipt);
-router.delete("/:id", authenticationMiddleware, receiptController.deleteReceipt);
+router.get("/", authenticationMiddleware, receiptController.getUserReceipts);
+
 
 module.exports = router;

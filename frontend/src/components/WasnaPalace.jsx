@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios"; // For API calls
 import { Helmet } from "react-helmet";
-import Navbar from "./Navbar";
 import { Button, Typography, Box, TextField } from "@mui/material";
 
 const WasnaPalace = () => {
@@ -31,7 +30,7 @@ const WasnaPalace = () => {
     },
     progressLine: {
       position: "absolute",
-      top: "50%", // Align the line with the center of the circles
+      top: "30%", // Align the line with the center of the circles
       left: "5%",
       right: "5%",
       height: "4px",
@@ -40,7 +39,7 @@ const WasnaPalace = () => {
     },
     activeLine: (activeStep) => ({
       position: "absolute",
-      top: "50%", // Align with the circles
+      top: "30%", // Align with the circles
       left: "5%",
       height: "4px",
       background: "#c00",
@@ -126,14 +125,17 @@ const WasnaPalace = () => {
     subEvents: {},
     decor: "",
     photography: "",
-    remarks: "",
+    menuRemarks: "",
+    decorRemarks: "",
+    photographyRemarks: "",
+    confirmationRemarks: "",
   });
   const [totalPrice, setTotalPrice] = useState(0);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Check login status
   const [userReceipts, setUserReceipts] = useState([]); // Store user receipts
 
   const eventOptions = {
-    Wedding: {
+    "Wedding": {
       description: "Plan your dream wedding with customizable options.",
       subEvents: {
         Dholki: "A colorful pre-wedding celebration.",
@@ -149,11 +151,36 @@ const WasnaPalace = () => {
         "Theme Party": "An exciting party with a chosen theme.",
       },
     },
+    "Baby Showers": {
+      description: "Plan your dream wedding with customizable options.",
+      subEvents: {
+        "Simple Gathering": "A casual event with close friends.",
+        "Theme Party": "An exciting party with a chosen theme.",
+      },
+    },
+    "Bridal Showers": {
+      description: "Plan your dream wedding with customizable options.",
+      subEvents: {
+        "Simple Gathering": "A casual event with close friends.",
+        "Theme Party": "An exciting party with a chosen theme.",
+      },
+    },
+    "Corporate Events": {
+      description: "Plan your dream wedding with customizable options.",
+      subEvents: {
+        "Simple Gathering": "A casual event with close friends.",
+        "Theme Party": "An exciting party with a chosen theme.",
+      },
+    },
   };
 
   const menus = {
     Dholki: [
-      { name: "Vegetarian Feast", price: 2000 },
+      {
+        name: "Vegetarian Feast",
+        description: "Celebrate with friends and family in style.",
+        price: 2000,
+      },
       { name: "Mixed Platter", price: 2500 },
     ],
     Mehndi: [
@@ -274,7 +301,10 @@ const WasnaPalace = () => {
           .map((menu) => menu.name),
         decor: formData.decor,
         photographyPackages: formData.photography ? [formData.photography] : [],
-        additionalRemarks: formData.remarks,
+        menuRemarks: formData.menuRemarks,
+        decorRemarks: formData.decorRemarks,
+        photographyPackagesRemarks: formData.photographyPackages,
+        additionalRemarks: formData.additionalRemarks,
         additionalCharges: 0, // Add any additional charges if applicable
       };
 
@@ -294,7 +324,10 @@ const WasnaPalace = () => {
         subEvents: {},
         decor: "",
         photography: "",
-        remarks: "",
+        menuRemarks: "",
+        decorRemarks: "",
+        photographyRemarks: "",
+        additionalRemarks: "",
       });
       setTotalPrice(0);
     } catch (error) {
@@ -363,12 +396,28 @@ const WasnaPalace = () => {
                   >
                     <Typography style={styles.cardText}>{menu.name}</Typography>
                     <Typography style={styles.priceText}>
+                      {menu.description}
+                    </Typography>
+                    <Typography style={styles.priceText}>
                       Price: RS. {menu.price}
                     </Typography>
                   </Box>
                 ))}
               </Box>
             ))}
+            {/* Additional Remarks */}
+            <Box style={{ marginTop: "20px" }}>
+              <TextField
+                label="Additional Remarks for Menu"
+                multiline
+                rows={4}
+                variant="outlined"
+                fullWidth
+                style={styles.textArea}
+                value={formData.remarks}
+                onChange={(e) => handleSelect("menuRemarks", e.target.value)}
+              />
+            </Box>
           </Box>
         );
       case 4:
@@ -393,6 +442,19 @@ const WasnaPalace = () => {
                 </Typography>
               </Box>
             ))}
+            {/* Additional Remarks */}
+            <Box style={{ marginTop: "20px" }}>
+              <TextField
+                label="Additional Remarks for Decor"
+                multiline
+                rows={4}
+                variant="outlined"
+                fullWidth
+                style={styles.textArea}
+                value={formData.remarks}
+                onChange={(e) => handleSelect("decorRemarks", e.target.value)}
+              />
+            </Box>
           </Box>
         );
       case 5:
@@ -417,6 +479,19 @@ const WasnaPalace = () => {
                 </Typography>
               </Box>
             ))}
+            {/* Additional Remarks */}
+            <Box style={{ marginTop: "20px" }}>
+              <TextField
+                label="Additional Remarks for Photography"
+                multiline
+                rows={4}
+                variant="outlined"
+                fullWidth
+                style={styles.textArea}
+                value={formData.remarks}
+                onChange={(e) => handleSelect("photographyRemarks", e.target.value)}
+              />
+            </Box>
           </Box>
         );
       case 6:
@@ -567,7 +642,7 @@ const WasnaPalace = () => {
                 fullWidth
                 style={styles.textArea}
                 value={formData.remarks}
-                onChange={(e) => handleSelect("remarks", e.target.value)}
+                onChange={(e) => handleSelect("additionalRemarks", e.target.value)}
               />
             </Box>
           </Box>
@@ -600,7 +675,7 @@ const WasnaPalace = () => {
               variant="outlined"
               fullWidth
               style={styles.textArea}
-              onChange={(e) => handleSelect("remarks", e.target.value)}
+              onChange={(e) => handleSelect("additionalRemarks", e.target.value)}
             />
           </Box>
         );
@@ -611,7 +686,6 @@ const WasnaPalace = () => {
 
   return (
     <div>
-      <Navbar />
       <div style={styles.bookingPage}>
         <Helmet>
           <title>Wasna Palace - Book Your Event</title>
@@ -658,7 +732,11 @@ const WasnaPalace = () => {
               Next →
             </Button>
           ) : (
-            <Button variant="contained" style={{ backgroundColor: "#d4a373" }}>
+            <Button
+              variant="contained"
+              style={{ backgroundColor: "#d4a373" }}
+              onClick={() => handleSubmit()}
+            >
               Confirm
             </Button>
           )}
