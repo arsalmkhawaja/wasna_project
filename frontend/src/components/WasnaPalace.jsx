@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import axios from "axios"; // For API calls
 import { Helmet } from "react-helmet";
 import { Button, Typography, Box, TextField } from "@mui/material";
+import eventOptions from "../Data/Events";
+import menus from "../Data/MenuData";
+import decorOptions from "../Data/DecorOptions";
+import photographyPackages from "../Data/PhotographyPackages";
 
 const WasnaPalace = () => {
   const styles = {
@@ -100,8 +104,8 @@ const WasnaPalace = () => {
       // textShadow: "2px 4px 4px rgba(0, 0, 0, 0.7)",
     },
     priceText: {
-      fontSize: "16px",
-      color: "#b10101",
+      fontSize: "20px",
+      color: "#d4a373",
       fontFamily: '"Playfair Display", serif',
     },
     descriptionText: {
@@ -123,6 +127,7 @@ const WasnaPalace = () => {
       fontWeight: "bold",
       color: "#c00",
       marginBottom: "10px",
+      fontFamily: '"Playfair Display", serif',
     },
   };
 
@@ -141,85 +146,6 @@ const WasnaPalace = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Check login status
   const [userReceipts, setUserReceipts] = useState([]); // Store user receipts
   const [currentSubEvent, setCurrentSubEvent] = useState("");
-
-  const eventOptions = {
-    Wedding: {
-      description: "Plan your dream wedding with customizable options.",
-      subEvents: {
-        Dholki: "A colorful pre-wedding celebration.",
-        Mehndi: "An evening of traditional dance and festivities.",
-        Barat: "The grand wedding day celebration.",
-        Walima: "A formal reception event.",
-      },
-    },
-    "Birthday/Get Together": {
-      description: "Celebrate with friends and family in style.",
-      subEvents: {
-        "Simple Gathering": "A casual event with close friends.",
-        "Theme Party": "An exciting party with a chosen theme.",
-      },
-    },
-    "Baby Showers": {
-      description: "Plan your dream wedding with customizable options.",
-      subEvents: {
-        "Simple Gathering": "A casual event with close friends.",
-        "Theme Party": "An exciting party with a chosen theme.",
-      },
-    },
-    "Bridal Showers": {
-      description: "Plan your dream wedding with customizable options.",
-      subEvents: {
-        "Simple Gathering": "A casual event with close friends.",
-        "Theme Party": "An exciting party with a chosen theme.",
-      },
-    },
-    "Corporate Events": {
-      description: "Plan your dream wedding with customizable options.",
-      subEvents: {
-        "Simple Gathering": "A casual event with close friends.",
-        "Theme Party": "An exciting party with a chosen theme.",
-      },
-    },
-  };
-  ///
-  const menus = {
-    Dholki: [
-      {
-        name: "Vegetarian Feast",
-        description: "Celebrate with friends and family in style.",
-        price: 2000,
-      },
-      { name: "Mixed Platter", price: 2500 },
-    ],
-    Mehndi: [
-      { name: "Buffet Dinner", price: 3000 },
-      { name: "Set Menu", price: 2700 },
-    ],
-    Barat: [
-      { name: "Traditional Feast", price: 3500 },
-      { name: "International Cuisine", price: 4000 },
-    ],
-    Walima: [
-      { name: "Grand Buffet", price: 4500 },
-      { name: "Dessert Special", price: 3200 },
-    ],
-    "Theme Party": [
-      { name: "Grand Buffet", price: 4500 },
-      { name: "Dessert Special", price: 3200 },
-    ],
-  };
-
-  const decorOptions = [
-    { name: "Traditional Decor", price: 5000 },
-    { name: "Modern Theme", price: 7000 },
-    { name: "Elegant Setup", price: 8000 },
-  ];
-
-  const photographyPackages = [
-    { name: "Standard Package", price: 10000 },
-    { name: "Premium Package", price: 15000 },
-    { name: "Deluxe Package", price: 20000 },
-  ];
 
   useEffect(() => {
     const checkLoginAndFetchReceipts = async () => {
@@ -344,7 +270,7 @@ const WasnaPalace = () => {
         alert("Please log in to confirm your booking.");
         return;
       }
-  
+
       // Decode token to extract user details (if applicable)
       const user = JSON.parse(atob(token.split(".")[1])); // Decode payload of JWT token (ensure it has user info)
       const receiptData = {
@@ -363,7 +289,7 @@ const WasnaPalace = () => {
         totalPrice: totalPrice, // Include the total price
         additionalCharges: 0, // Add any additional charges if applicable
       };
-  
+
       // Send the data to the backend
       const response = await axios.post(
         "http://localhost:4000/api/v2/", // Adjust this URL if necessary
@@ -372,7 +298,7 @@ const WasnaPalace = () => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-  
+
       alert("Booking confirmed successfully!");
       setUserReceipts([...userReceipts, response.data]); // Update the user's receipts
       setActiveStep(1); // Reset the form
@@ -466,9 +392,21 @@ const WasnaPalace = () => {
                     onClick={() => handleMenuSelect(currentSubEvent, menu)}
                   >
                     <Typography style={styles.cardText}>{menu.name}</Typography>
-                    <Typography style={styles.priceText}>
-                      {menu.description}
-                    </Typography>
+
+                    {/* Render description items as separate lines */}
+                    {menu.description && Array.isArray(menu.description) && (
+                      <Box style={{ marginTop: "10px" }}>
+                        {menu.description.map((desc, index) => (
+                          <Typography
+                            key={index}
+                            style={styles.descriptionText}
+                          >
+                            {desc}
+                          </Typography>
+                        ))}
+                      </Box>
+                    )}
+
                     <Typography style={styles.priceText}>
                       Price: RS. {menu.price}
                     </Typography>
@@ -492,6 +430,7 @@ const WasnaPalace = () => {
             </Box>
           </Box>
         );
+
       case 4:
         return (
           <Box>
@@ -532,25 +471,53 @@ const WasnaPalace = () => {
       case 5:
         return (
           <Box>
-            {photographyPackages.map((pkg) => (
-              <Box
-                key={pkg.name}
-                style={styles.card(formData.photography === pkg.name)}
-                onClick={() => {
-                  handleSelect("photography", pkg.name);
-                  calculateTotalPrice(
-                    formData.subEvents,
-                    formData.decor,
-                    pkg.name
-                  );
-                }}
-              >
-                <Typography style={styles.cardText}>{pkg.name}</Typography>
-                <Typography style={styles.priceText}>
-                  Price: RS. {pkg.price}
+            <Typography
+              variant="h5"
+              style={{
+                fontWeight: "bold",
+                color: "#c00",
+                marginBottom: "10px",
+                fontFamily: '"Playfair Display", serif',
+              }}
+            >
+              Select Photography Package
+            </Typography>
+
+            {photographyPackages.map((packageType) => (
+              <Box key={packageType.type}>
+                <Typography variant="h6" style={styles.subEventHeading}>
+                  {packageType.type} Packages
                 </Typography>
+
+                {packageType.packages.map((pkg) => (
+                  <Box
+                    key={pkg.name}
+                    style={styles.card(formData.photography === pkg.name)}
+                    onClick={() => handleSelect("photography", pkg.name)}
+                  >
+                    <Typography style={styles.cardText}>{pkg.name}</Typography>
+
+                    {pkg.description && Array.isArray(pkg.description) && (
+                      <Box style={{ marginTop: "10px" }}>
+                        {pkg.description.map((desc, index) => (
+                          <Typography
+                            key={index}
+                            style={styles.descriptionText}
+                          >
+                            {desc}
+                          </Typography>
+                        ))}
+                      </Box>
+                    )}
+
+                    <Typography style={styles.priceText}>
+                      Price: RS. {pkg.price}
+                    </Typography>
+                  </Box>
+                ))}
               </Box>
             ))}
+
             {/* Additional Remarks */}
             <Box style={{ marginTop: "20px" }}>
               <TextField
@@ -568,6 +535,7 @@ const WasnaPalace = () => {
             </Box>
           </Box>
         );
+
       case 6:
         return (
           <Box>
