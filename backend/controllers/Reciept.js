@@ -6,7 +6,7 @@ exports.createReceipt = async (req, res) => {
   try {
     const { eventType, subEvents, menus, decor, photographyPackages, menuRemarks, decorRemarks, photographyRemarks, additionalRemarks, totalPrice } = req.body;
 
-    const user = req.user; // User is added to the request by auth middleware
+    const user = req.user; 
 
     const newReceipt = new Receipt({
       user: user._id,
