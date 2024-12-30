@@ -4,14 +4,7 @@ const jwt = require("jsonwebtoken");
 // Register Controller
 const register = async (req, res) => {
   try {
-    const {
-      password,
-      fullName,
-      dateOfBirth,
-      gender,
-      phoneNumber,
-      profileImage,
-    } = req.body;
+    const { password, fullName, dateOfBirth, gender, phoneNumber } = req.body;
 
     const user = await User.create({
       password,
@@ -19,7 +12,6 @@ const register = async (req, res) => {
       dateOfBirth,
       gender,
       phoneNumber,
-      profileImage,
     });
 
     const token = jwt.sign(
@@ -97,7 +89,6 @@ const updateProfile = async (req, res) => {
       dateOfBirth: req.body.dateOfBirth,
       gender: req.body.gender,
       phoneNumber: req.body.phoneNumber,
-      profileImage: req.body.profileImage,
     };
 
     // Remove undefined fields (only update provided values)

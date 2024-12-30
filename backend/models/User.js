@@ -7,9 +7,6 @@ const UserSchema = new mongoose.Schema({
     required: [true, "Please provide a password"],
     minlength: 3,
   },
-  profileImage: {
-    type: String,
-  },
   fullName: {
     type: String,
     required: function () {

@@ -10,7 +10,6 @@ const Profile = () => {
     dateOfBirth: "",
     gender: "",
     phoneNumber: "",
-    profileImage: "",
   });
   const [editMode, setEditMode] = useState({});
   const [loading, setLoading] = useState(true);
@@ -35,14 +34,13 @@ const Profile = () => {
             headers: { Authorization: `Bearer ${token}` },
           }
         );
-        const { fullName, dateOfBirth, gender, phoneNumber, profileImage } =
+        const { fullName, dateOfBirth, gender, phoneNumber } =
           response.data.user;
         setFormData({
           fullName,
           dateOfBirth: dateOfBirth ? dateOfBirth.split("T")[0] : "",
           gender,
           phoneNumber,
-          profileImage,
         });
       } catch (error) {
         console.error("Error fetching profile data:", error);
@@ -135,17 +133,6 @@ const Profile = () => {
             marginBottom: "20px",
           }}
         >
-          <img
-            src={formData.profileImage || "https://via.placeholder.com/150"}
-            alt="Profile"
-            style={{
-              width: "100px",
-              height: "100px",
-              borderRadius: "50%",
-              objectFit: "cover",
-              marginBottom: "10px",
-            }}
-          />
           <h2
             style={{ fontSize: "24px", fontWeight: "bold", color: "#d4a373" }}
           >
@@ -243,7 +230,8 @@ const Profile = () => {
               position: "fixed",
               top: "20px",
               right: "20px",
-              backgroundColor: notification.type === "success" ? "#4caf50" : "#f44336",
+              backgroundColor:
+                notification.type === "success" ? "#4caf50" : "#f44336",
               color: "#fff",
               padding: "15px",
               borderRadius: "5px",

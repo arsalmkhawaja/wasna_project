@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom"; // Import useLocation and useNavigate
 import axios from "axios";
 
-const Auth = () => {
+const Login = () => {
   const [isLogin, setIsLogin] = useState(true); // Toggle between login and signup
   const [formData, setFormData] = useState({
     phoneNumber: "", // For both login and signup
@@ -11,7 +11,6 @@ const Auth = () => {
     email: "",
     dateOfBirth: "",
     gender: "",
-    profileImage: "",
   });
   const [error, setError] = useState(null); // For error messages
   const navigate = useNavigate(); // Hook to navigate to another page
@@ -46,7 +45,6 @@ const Auth = () => {
           dateOfBirth: formData.dateOfBirth,
           gender: formData.gender,
           phoneNumber: formData.phoneNumber,
-          profileImage: formData.profileImage,
         };
 
     try {
@@ -143,19 +141,6 @@ const Auth = () => {
                   value={formData.phoneNumber}
                   onChange={handleChange}
                   required
-                  style={styles.input}
-                />
-              </div>
-              <div style={styles.inputGroup}>
-                <label htmlFor="profileImage" style={styles.label}>
-                  Profile Image URL
-                </label>
-                <input
-                  type="text"
-                  id="profileImage"
-                  name="profileImage"
-                  value={formData.profileImage}
-                  onChange={handleChange}
                   style={styles.input}
                 />
               </div>
@@ -287,4 +272,4 @@ const styles = {
   },
 };
 
-export default Auth;
+export default Login;

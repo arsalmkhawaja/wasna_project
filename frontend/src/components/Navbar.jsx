@@ -91,26 +91,6 @@ const Navbar = () => {
               </li>
               <li>
                 <NavLink
-                  to="/wasna-pure"
-                  className={({ isActive }) =>
-                    isActive ? "active" : undefined
-                  }
-                >
-                  Pure
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/harmony-vista"
-                  className={({ isActive }) =>
-                    isActive ? "active" : undefined
-                  }
-                >
-                  Harmony Vista
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
                   to="/about-us"
                   className={({ isActive }) =>
                     isActive ? "active" : undefined
@@ -204,24 +184,6 @@ const Navbar = () => {
               onClick={closeDrawer}
             >
               4D Restaurant
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/wasna-pure"
-              className={({ isActive }) => (isActive ? "active" : undefined)}
-              onClick={closeDrawer}
-            >
-              Pure
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/harmony-vista"
-              className={({ isActive }) => (isActive ? "active" : undefined)}
-              onClick={closeDrawer}
-            >
-              Harmony Vista
             </NavLink>
           </li>
           <li>
