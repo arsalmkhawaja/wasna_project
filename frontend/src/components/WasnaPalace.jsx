@@ -71,6 +71,7 @@ const WasnaPalace = () => {
       marginTop: "8px",
     }),
     form: {
+      fontFamily: '"Playfair Display", serif',
       display: "inline-block",
       width: "80%",
       marginTop: "40px",
@@ -81,8 +82,8 @@ const WasnaPalace = () => {
       padding: "20px",
       margin: "20px auto",
       borderRadius: "12px",
-      background: isSelected ? "#fff" : "rgba(255, 255, 255, 0.2)",
-      backdropFilter: "blur(10px)",
+      background: isSelected ? "rgba(212, 163, 115, 0.2)" : "#fff", // Lightened golden background
+      backdropFilter: "blur(15px)", // Increased blur effect
       border: isSelected ? "2px solid #c00" : "2px solid transparent",
       boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
       cursor: "pointer",
@@ -90,22 +91,28 @@ const WasnaPalace = () => {
       textAlign: "center",
       fontFamily: '"Playfair Display", serif',
     }),
+
     cardText: {
-      fontSize: "20px",
+      fontSize: "25px",
       fontWeight: "bold",
-      color: "#333",
+      color: "#d4a373",
+      fontFamily: '"Playfair Display", serif',
+      // textShadow: "2px 4px 4px rgba(0, 0, 0, 0.7)",
     },
     priceText: {
       fontSize: "16px",
-      color: "#666",
+      color: "#b10101",
+      fontFamily: '"Playfair Display", serif',
     },
     descriptionText: {
       fontSize: "14px",
-      color: "#666",
+      color: "#b10101",
+      fontFamily: '"Playfair Display", serif',
     },
     textArea: {
       width: "100%",
       marginTop: "20px",
+      marginBottom: "20px",
     },
     subEventContainer: {
       marginTop: "20px",
@@ -133,9 +140,10 @@ const WasnaPalace = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Check login status
   const [userReceipts, setUserReceipts] = useState([]); // Store user receipts
+  const [currentSubEvent, setCurrentSubEvent] = useState("");
 
   const eventOptions = {
-    "Wedding": {
+    Wedding: {
       description: "Plan your dream wedding with customizable options.",
       subEvents: {
         Dholki: "A colorful pre-wedding celebration.",
@@ -173,7 +181,7 @@ const WasnaPalace = () => {
       },
     },
   };
-
+  ///
   const menus = {
     Dholki: [
       {
@@ -192,6 +200,10 @@ const WasnaPalace = () => {
       { name: "International Cuisine", price: 4000 },
     ],
     Walima: [
+      { name: "Grand Buffet", price: 4500 },
+      { name: "Dessert Special", price: 3200 },
+    ],
+    "Theme Party": [
       { name: "Grand Buffet", price: 4500 },
       { name: "Dessert Special", price: 3200 },
     ],
@@ -260,7 +272,47 @@ const WasnaPalace = () => {
     setFormData({ ...formData, subEvents: updatedSubEvents });
     calculateTotalPrice(updatedSubEvents, formData.decor, formData.photography);
   };
+  const resetCurrentStep = (step) => {
+    switch (step) {
+      case 2: // Reset Sub-Events
+        setFormData((prev) => ({
+          ...prev,
+          subEvents: {},
+        }));
+        break;
+      case 3: // Reset Menu
+        setFormData((prev) => ({
+          ...prev,
+          subEvents: {}, // Clear menu selections for all sub-events
+          menuRemarks: "",
+        }));
+        setCurrentSubEvent("");
+        break;
+      case 4: // Reset Decor
+        setFormData((prev) => ({
+          ...prev,
+          decor: "",
+          decorRemarks: "",
+        }));
+        break;
+      case 5: // Reset Photography
+        setFormData((prev) => ({
+          ...prev,
+          photography: "",
+          photographyRemarks: "",
+        }));
+        break;
+      default:
+        break;
+    }
 
+    // Recalculate total price after resetting
+    calculateTotalPrice(
+      formData.subEvents,
+      step === 4 ? "" : formData.decor, // Reset decor if step is 4
+      step === 5 ? "" : formData.photography // Reset photography if step is 5
+    );
+  };
   const calculateTotalPrice = (updatedSubEvents, decor, photography) => {
     let price = 0;
 
@@ -379,20 +431,34 @@ const WasnaPalace = () => {
       case 3:
         return (
           <Box>
-            {Object.keys(formData.subEvents).map((subEvent) => (
-              <Box key={subEvent} style={styles.subEventContainer}>
+            {/* Display list of sub-events to select */}
+            <Box>
+              {Object.keys(formData.subEvents).map((subEvent) => (
+                <Box
+                  key={subEvent}
+                  style={styles.card(currentSubEvent === subEvent)}
+                  onClick={() => setCurrentSubEvent(subEvent)} // Set the current sub-event
+                >
+                  <Typography style={styles.cardText}>{subEvent}</Typography>
+                </Box>
+              ))}
+            </Box>
+
+            {/* Show menus only for the currently selected sub-event */}
+            {currentSubEvent && (
+              <Box style={{ marginTop: "20px" }}>
                 <Typography style={styles.subEventHeading}>
-                  {subEvent}
+                  {currentSubEvent} - Select Menu
                 </Typography>
-                {(menus[subEvent] || []).map((menu) => (
+                {(menus[currentSubEvent] || []).map((menu) => (
                   <Box
                     key={menu.name}
                     style={styles.card(
-                      formData.subEvents[subEvent]?.find(
+                      formData.subEvents[currentSubEvent]?.find(
                         (m) => m.name === menu.name
                       )
                     )}
-                    onClick={() => handleMenuSelect(subEvent, menu)}
+                    onClick={() => handleMenuSelect(currentSubEvent, menu)}
                   >
                     <Typography style={styles.cardText}>{menu.name}</Typography>
                     <Typography style={styles.priceText}>
@@ -404,7 +470,8 @@ const WasnaPalace = () => {
                   </Box>
                 ))}
               </Box>
-            ))}
+            )}
+
             {/* Additional Remarks */}
             <Box style={{ marginTop: "20px" }}>
               <TextField
@@ -414,7 +481,7 @@ const WasnaPalace = () => {
                 variant="outlined"
                 fullWidth
                 style={styles.textArea}
-                value={formData.remarks}
+                value={formData.menuRemarks}
                 onChange={(e) => handleSelect("menuRemarks", e.target.value)}
               />
             </Box>
@@ -451,7 +518,7 @@ const WasnaPalace = () => {
                 variant="outlined"
                 fullWidth
                 style={styles.textArea}
-                value={formData.remarks}
+                value={formData.decorRemarks}
                 onChange={(e) => handleSelect("decorRemarks", e.target.value)}
               />
             </Box>
@@ -488,8 +555,10 @@ const WasnaPalace = () => {
                 variant="outlined"
                 fullWidth
                 style={styles.textArea}
-                value={formData.remarks}
-                onChange={(e) => handleSelect("photographyRemarks", e.target.value)}
+                value={formData.photographyRemarks}
+                onChange={(e) =>
+                  handleSelect("photographyRemarks", e.target.value)
+                }
               />
             </Box>
           </Box>
@@ -641,44 +710,15 @@ const WasnaPalace = () => {
                 variant="outlined"
                 fullWidth
                 style={styles.textArea}
-                value={formData.remarks}
-                onChange={(e) => handleSelect("additionalRemarks", e.target.value)}
+                value={formData.additionalRemarks}
+                onChange={(e) =>
+                  handleSelect("additionalRemarks", e.target.value)
+                }
               />
             </Box>
           </Box>
         );
 
-        return (
-          <Box>
-            <Typography variant="h6">Review Your Booking Details</Typography>
-            <ul>
-              <li>Event Type: {formData.eventType}</li>
-              <li>
-                Sub-Events:{" "}
-                {Object.keys(formData.subEvents).map((subEvent) => (
-                  <div key={subEvent}>
-                    <strong>{subEvent}</strong>:{" "}
-                    {formData.subEvents[subEvent]
-                      .map((menu) => menu.name)
-                      .join(", ")}
-                  </div>
-                ))}
-              </li>
-              <li>Decor: {formData.decor}</li>
-              <li>Photography: {formData.photography}</li>
-              <li>Total Price: RS. {totalPrice}</li>
-            </ul>
-            <TextField
-              label="Additional Remarks"
-              multiline
-              rows={4}
-              variant="outlined"
-              fullWidth
-              style={styles.textArea}
-              onChange={(e) => handleSelect("additionalRemarks", e.target.value)}
-            />
-          </Box>
-        );
       default:
         return null;
     }
@@ -717,12 +757,16 @@ const WasnaPalace = () => {
           {activeStep > 1 && (
             <Button
               variant="contained"
-              onClick={() => setActiveStep((prev) => prev - 1)}
+              onClick={() => {
+                resetCurrentStep(activeStep); // Reset current step options
+                setActiveStep((prev) => prev - 1); // Move to the previous step
+              }}
               style={{ marginRight: "10px", backgroundColor: "#d4a373" }}
             >
               Back
             </Button>
           )}
+          {/* Next Button */}
           {activeStep < 6 ? (
             <Button
               variant="contained"
