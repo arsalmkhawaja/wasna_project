@@ -344,8 +344,11 @@ const WasnaPalace = () => {
         alert("Please log in to confirm your booking.");
         return;
       }
-
+  
+      // Decode token to extract user details (if applicable)
+      const user = JSON.parse(atob(token.split(".")[1])); // Decode payload of JWT token (ensure it has user info)
       const receiptData = {
+        user: user._id || user.id, // Use the user ID from token (adjust based on your backend)
         eventType: formData.eventType,
         subEvents: Object.keys(formData.subEvents),
         menus: Object.values(formData.subEvents)
@@ -357,17 +360,19 @@ const WasnaPalace = () => {
         decorRemarks: formData.decorRemarks,
         photographyPackagesRemarks: formData.photographyPackages,
         additionalRemarks: formData.additionalRemarks,
+        totalPrice: totalPrice, // Include the total price
         additionalCharges: 0, // Add any additional charges if applicable
       };
-
+  
+      // Send the data to the backend
       const response = await axios.post(
-        "http://localhost:4000/api/v2/",
+        "http://localhost:4000/api/v2/", // Adjust this URL if necessary
         receiptData,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-
+  
       alert("Booking confirmed successfully!");
       setUserReceipts([...userReceipts, response.data]); // Update the user's receipts
       setActiveStep(1); // Reset the form
