@@ -7,6 +7,10 @@ import customPin from "../assets/pin.svg";
 import "../styles/LandingPage.css";
 import img2 from "../assets/img2.jpg";
 import img3 from "../assets/img3.jpg";
+import parking from "../assets/parking.png";
+import menu from "../assets/menu.png";
+import halls from "../assets/halls.png";
+import guest from "../assets/guest.png";
 
 const LandingPage = () => {
   const position = [33.565904425010615, 73.16505889682914];
@@ -108,19 +112,27 @@ const LandingPage = () => {
         <h2>Features</h2>
         <div className="features-grid">
           <div className="feature-item">
-            <span className="feature-icon">🎉</span>
+            <span className="feature-icon">
+              <img src={guest} alt="Guest Icon" />
+            </span>
             <span className="feature-text">2000+ Guest Capacity</span>
           </div>
           <div className="feature-item">
-            <span className="feature-icon">🚗</span>
+            <span className="feature-icon">
+              <img src={parking} alt="Parking Icon" />
+            </span>
             <span className="feature-text">200+ Car Parking</span>
           </div>
           <div className="feature-item">
-            <span className="feature-icon">🏛️</span>
+            <span className="feature-icon">
+              <img src={halls} alt="Halls Icon" />
+            </span>
             <span className="feature-text">4 Elegant Halls</span>
           </div>
           <div className="feature-item">
-            <span className="feature-icon">🍽️</span>
+            <span className="feature-icon">
+              <img src={menu} alt="Menu Icon" />
+            </span>
             <span className="feature-text">20+ Gourmet Menus</span>
           </div>
         </div>
