@@ -11,6 +11,7 @@ const photographyPackages = [
           "1 Photographer",
         ],
         price: "25000 For One Day",
+        addPrice: 25000,
       },
       {
         name: "Event Videography",
@@ -21,6 +22,7 @@ const photographyPackages = [
           "1 Videographer",
         ],
         price: "25000 For One Day",
+        addPrice: 25000,
       },
     ],
   },
@@ -37,6 +39,7 @@ const photographyPackages = [
           "Drone Photography",
         ],
         price: 30000,
+        addPrice: 30000,
       },
       {
         name: "Premium Photography + Video",
@@ -48,6 +51,7 @@ const photographyPackages = [
           "Drone Photography & Cinematic Video",
         ],
         price: 40000,
+        addPrice: 40000,
       },
     ],
   },
@@ -64,6 +68,7 @@ const photographyPackages = [
           "Drone Photography & Live Streaming",
         ],
         price: 50000,
+        addPrice: 50000,
       },
       {
         name: "Luxury Elite",
@@ -75,6 +80,7 @@ const photographyPackages = [
           "Drone Photography, Live Streaming & 4K Video",
         ],
         price: 70000,
+        addPrice: 70000,
       },
     ],
   },
