@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { Icon } from "leaflet";
 import "leaflet/dist/leaflet.css";
-import customPin from "../assets/pin.png";
+import customPin from "../assets/pin.svg";
 import "../styles/LandingPage.css";
 import img2 from "../assets/img2.jpg";
 import img3 from "../assets/img3.jpg";
@@ -91,7 +91,9 @@ const LandingPage = () => {
               </ul>
             </div>
 
-            <a href="event-complex" className="event-management-button">Learn More →</a>
+            <a href="event-complex" className="event-management-button">
+              Learn More →
+            </a>
           </div>
           <img
             src={img3}
@@ -146,20 +148,6 @@ const LandingPage = () => {
           </MapContainer>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="footer" id="contact-us">
-        <div className="footer-links">
-          <a href="home">Home</a>
-          <a href="event-complex">Event Complex</a>
-          <a href="wasna-palace">Wasna Palace</a>
-          <a href="restaurant">4D Restaurant</a>
-          <a href="pure">Pure</a>
-          <a href="harmony-vista">Harmony Vista</a>
-          <a href="about-us">About Us</a>
-          <a href="contact-us">Contact Us</a>
-        </div>
-      </footer>
     </div>
   );
 };

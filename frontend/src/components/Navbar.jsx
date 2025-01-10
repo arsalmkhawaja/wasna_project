@@ -50,14 +50,14 @@ const Navbar = () => {
     <>
       <nav>
         <div className="custom-navbar">
+          {/* Logo */}
+          <div className="navbar-logo">
+            <NavLink to="/">
+              <img src={wasna_logo} alt="Wasna Palace Logo" />
+            </NavLink>
+          </div>
           <div className="navbar-container">
-            {/* Logo */}
-            <div className="navbar-logo">
-              <NavLink to="/">
-                <img src={wasna_logo} alt="Wasna Palace Logo" />
-              </NavLink>
-            </div>
-            <ul className="navbar-links left-links">
+            <ul className="navbar-links">
               <li>
                 <NavLink
                   to="/"

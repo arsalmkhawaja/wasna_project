@@ -244,20 +244,20 @@ const WasnaPalace = () => {
 
     Object.values(updatedSubEvents).forEach((menus) => {
       menus.forEach((menu) => {
-        price += menu.price;
+        price += menu.addPrice;
       });
     });
 
     if (decor) {
       const decorOption = decorOptions.find((d) => d.name === decor);
-      if (decorOption) price += decorOption.price;
+      if (decorOption) price += decorOption.addPrice;
     }
 
     if (photography) {
       const photographyOption = photographyPackages.find(
         (p) => p.name === photography
       );
-      if (photographyOption) price += photographyOption.price;
+      if (photographyOption) price += photographyOption.addPrice;
     }
 
     setTotalPrice(price);
