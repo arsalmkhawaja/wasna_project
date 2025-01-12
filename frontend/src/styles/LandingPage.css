@@ -323,16 +323,25 @@ a {
 }
 
 .services-content ul {
-  list-style: inside disc;
+  list-style: none; /* Remove default bullets */
   margin: 15px 0;
-  padding-left: 20px;
+  padding-left: 0; /* Remove padding to align items */
   font-family: var(--font-secondary);
 }
 
 .services-content ul li {
-  margin-bottom: 8px;
+  margin-bottom: 12px; /* Increase spacing for better readability */
   font-size: 20px;
   color: var(--primary-color);
+  display: flex; /* Use flex to align icon and text */
+  align-items: center; /* Vertically center icon and text */
+}
+
+.services-content ul li::before {
+  content: "✔"; /* Replace with a checkmark or any Unicode character */
+  margin-right: 12px; /* Add space between the icon and text */
+  font-size: 24px; /* Make the icon slightly larger */
+  color: var(--primary2-color); /* Use secondary color for the icon */
 }
 
 .event-management-button {
@@ -363,9 +372,9 @@ a {
 .features h2 {
   font-family: var(--font-heading);
   color: var(--primary-color);
-  font-size: 48px;
+  font-size: 58px;
   margin-top: 15px;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
   text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.7);
 }
 
@@ -376,6 +385,7 @@ a {
   align-items: center;
   gap: 15px;
   flex-wrap: wrap;
+  padding: 0px 40px;
 }
 
 .feature-item {
@@ -394,7 +404,7 @@ a {
 .feature-text {
   color: var(--primary-color);
   font-weight: 600;
-  font-size: 30px;
+  font-size: 35px;
   font-family: var(--font-body);
   text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.7);
   padding-top: 10px;
