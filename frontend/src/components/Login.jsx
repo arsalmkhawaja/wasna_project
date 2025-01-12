@@ -3,6 +3,8 @@ import { useNavigate, useLocation } from "react-router-dom"; // Import useLocati
 import axios from "axios";
 
 const Login = () => {
+  const [isHovered1, setIsHovered1] = useState(false);
+  const [isHovered2, setIsHovered2] = useState(false);
   const [isLogin, setIsLogin] = useState(true); // Toggle between login and signup
   const [formData, setFormData] = useState({
     phoneNumber: "", // For both login and signup
@@ -60,7 +62,79 @@ const Login = () => {
       setError(err.response?.data?.msg || "An error occurred"); // Show error message
     }
   };
+  const styles = {
+    authContainer: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      minHeight: "110vh",
+      backgroundColor: "#f4f4f4",
+    },
+    authBox: {
+      backgroundColor: "#fff",
+      padding: "20px",
+      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+      borderRadius: "8px",
+      width: "500px",
+    },
+    header: {
+      textAlign: "center",
+      marginBottom: "20px",
+      fontSize: "30px",
+    },
+    inputGroup: {
+      marginBottom: "15px",
+    },
+    label: {
+      display: "block",
+      fontWeight: "bold",
+      fontSize: "25px",
+      padding: "10px",
+    },
+    input: {
+      width: "100%",
+      padding: "10px",
+      border: "1px solid #ccc",
+      borderRadius: "5px",
+      fontSize: "16px",
+    },
+    submitButton: {
+      width: "100%",
+      padding: "12px 30px",
+      backgroundColor: isHovered1 ? "#3d0420" : "#d4a373",
+      color: "#ffffff",
+      border: "none",
+      borderRadius: "30px",
+      fontSize: "16px",
+      fontWeight: 600,
+      cursor: "pointer",
+      transition: "background-color 0.3s ease",
+      textDecoration: "none",
+      marginBottom: "20px",
+    },
 
+    errorMessage: {
+      color: "red",
+      textAlign: "center",
+      marginBottom: "20px",
+    },
+    toggleAuth: {
+      textAlign: "center",
+    },
+    toggleButton: {
+      width: "100%",
+      padding: "12px 30px",
+      backgroundColor: isHovered2 ? "#3d0420" : "#d4a373",
+      color: "#ffffff",
+      border: "none",
+      borderRadius: "30px",
+      fontSize: "16px",
+      fontWeight: 600,
+      cursor: "pointer",
+      transition: "background-color 0.3s ease",
+      textDecoration: "none",
+    },
+  };
   return (
     <div style={styles.authContainer}>
       <div style={styles.authBox}>
@@ -195,7 +269,12 @@ const Login = () => {
             </>
           )}
 
-          <button type="submit" style={styles.submitButton}>
+          <button
+            type="submit"
+            style={styles.submitButton}
+            onMouseEnter={() => setIsHovered1(true)}
+            onMouseLeave={() => setIsHovered1(false)}
+          >
             {isLogin ? "Login" : "Sign Up"}
           </button>
         </form>
@@ -204,6 +283,8 @@ const Login = () => {
           <button
             onClick={() => setIsLogin(!isLogin)}
             style={styles.toggleButton}
+            onMouseEnter={() => setIsHovered2(true)}
+            onMouseLeave={() => setIsHovered2(false)}
           >
             {isLogin ? "Create an Account" : "Already have an account? Login"}
           </button>
@@ -211,65 +292,6 @@ const Login = () => {
       </div>
     </div>
   );
-};
-
-const styles = {
-  authContainer: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    height: "100vh",
-    backgroundColor: "#f4f4f4",
-  },
-  authBox: {
-    backgroundColor: "#fff",
-    padding: "20px",
-    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-    borderRadius: "8px",
-    width: "400px",
-  },
-  header: {
-    textAlign: "center",
-    marginBottom: "20px",
-  },
-  inputGroup: {
-    marginBottom: "15px",
-  },
-  label: {
-    display: "block",
-    fontWeight: "bold",
-  },
-  input: {
-    width: "100%",
-    padding: "10px",
-    border: "1px solid #ccc",
-    borderRadius: "5px",
-    fontSize: "16px",
-  },
-  submitButton: {
-    width: "100%",
-    padding: "12px",
-    backgroundColor: "#4caf50",
-    color: "white",
-    border: "none",
-    borderRadius: "5px",
-    fontSize: "16px",
-    cursor: "pointer",
-  },
-  errorMessage: {
-    color: "red",
-    textAlign: "center",
-    marginBottom: "20px",
-  },
-  toggleAuth: {
-    textAlign: "center",
-  },
-  toggleButton: {
-    background: "none",
-    border: "none",
-    color: "#4caf50",
-    cursor: "pointer",
-  },
 };
 
 export default Login;
