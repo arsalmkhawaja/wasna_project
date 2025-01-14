@@ -11,14 +11,14 @@ import bgImage from "../assets/Background.jpg";
 const WasnaPalace = () => {
   const styles = {
     bookingPage: {
-      fontFamily: '"Playfair Display", serif',
+      fontFamily: '"Americana", regular',
       textAlign: "center",
       minHeight: "100vh",
       marginTop: "75px",
       overflow: "hidden",
       position: "relative", // Required for the overlay div
       backgroundImage: `url(${bgImage})`,
-      backgroundSize: "cover",
+      backgroundSize: "contain",
       backgroundPosition: "center",
       backgroundAttachment: "fixed",
     },
@@ -32,14 +32,18 @@ const WasnaPalace = () => {
       bottom: 0,
       minHeight: "100vh",
       background: "rgba(0, 0, 0, 0.2)", // Dark overlay
-      backdropFilter: "blur(5px)", // Apply the blur effect
+      backdropFilter: "blur(3px)", // Apply the blur effect
     },
 
     heading: {
-      fontSize: "36px",
-      margin: "20px 0",
+      fontSize: "56px",
+      margin: "20px 10px",
+      paddingTop: "40px",
+      paddingBottom: "50px",
       fontWeight: "bold",
-      color: "#d4a373",
+      color: "#3d0420",
+      fontFamily: '"Americana", regular',
+      textShadow: "4px 4px 10px rgba(0, 0, 0, 1)",
     },
     progressBarContainer: {
       display: "flex",
@@ -52,48 +56,59 @@ const WasnaPalace = () => {
     },
     progressLine: {
       position: "absolute",
-      top: "30%", // Align the line with the center of the circles
+      top: "17%", // Align the line with the center of the circles
       left: "5%",
       right: "5%",
       height: "4px",
-      background: "#eaeaea",
-      transform: "translateY(-50%)", // Ensure it's centered vertically
+      background: "#adaaaa",
+      transform: "translateY(-50%)", // Center it vertically
+      boxShadow: "0 4px 8px rgba(0, 0, 0, 1)", // Add shadow to the line
     },
+
     activeLine: (activeStep) => ({
       position: "absolute",
-      top: "30%", // Align with the circles
+      top: "17%", // Align with the circles
       left: "5%",
       height: "4px",
-      background: "#c00",
-      width: `${17.8 * (activeStep - 1)}%`, // Adjust width based on active step
+      background: "#3d0420",
+      width: `${(88 / 5) * (activeStep - 1)}%`, // Divide the progress line into 6 steps
       transform: "translateY(-50%)", // Keep it aligned vertically
+      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.5)", // Add shadow to the active line
     }),
+
     stepContainer: {
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
     },
+
     stepCircle: (isActive) => ({
-      width: "40px",
-      height: "40px",
+      width: "50px",
+      height: "50px",
       borderRadius: "50%",
-      background: isActive ? "#c00" : "#eaeaea",
+      background: isActive ? "#3d0420" : "#eaeaea",
       color: isActive ? "#fff" : "#aaa",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
+      fontSize: "30px",
       fontWeight: "bold",
-      border: isActive ? "2px solid #c00" : "2px solid #ccc",
+      border: isActive ? "2px solid #3d0420" : "2px solid #ccc",
       position: "relative",
+      boxShadow: isActive
+        ? "0 4px 8px rgba(0, 0, 0, 1)"
+        : "0 4px 8px rgba(0, 0, 0, 0.5)",
     }),
+
     stepLabel: (isActive) => ({
-      fontSize: "12px",
+      fontSize: "20px",
       fontWeight: isActive ? "bold" : "normal",
-      color: isActive ? "#c00" : "#aaa",
+      color: isActive ? "#3d0420" : "#aaa",
       marginTop: "8px",
+      textShadow: "0 4px 8px rgba(0, 0, 0, 1)",
     }),
     form: {
-      fontFamily: '"Playfair Display", serif',
+      fontFamily: '"Americana", regular',
       display: "inline-block",
       width: "80%",
       marginTop: "40px",
@@ -104,48 +119,107 @@ const WasnaPalace = () => {
       padding: "20px",
       margin: "20px auto",
       borderRadius: "12px",
-      background: isSelected ? "rgba(212, 163, 115, 0.2)" : "#fff", // Lightened golden background
-      backdropFilter: "blur(15px)", // Increased blur effect
-      border: isSelected ? "2px solid #c00" : "2px solid transparent",
-      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+      background: isSelected ? "rgba(61, 4, 32, 0.9)" : "#fff", // Lightened golden background
+      backdropFilter: "blur(5px)", // Increased blur effect
+      border: isSelected ? "2px solid #3d0420" : "2px solid transparent",
+      // boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
       cursor: "pointer",
       transition: "all 0.3s ease",
       textAlign: "center",
-      fontFamily: '"Playfair Display", serif',
     }),
 
     cardText: {
-      fontSize: "25px",
+      fontSize: "35px",
       fontWeight: "bold",
       color: "#d4a373",
-      fontFamily: '"Playfair Display", serif',
+      fontFamily: '"Americana", regular',
       // textShadow: "2px 4px 4px rgba(0, 0, 0, 0.7)",
     },
     priceText: {
-      fontSize: "20px",
+      fontSize: "30px",
       color: "#d4a373",
-      fontFamily: '"Playfair Display", serif',
+      fontFamily: '"Bank Gothic", sans-serif',
     },
-    descriptionText: {
-      fontSize: "14px",
-      color: "#b10101",
-      fontFamily: '"Playfair Display", serif',
-    },
+    descriptionText: (isSelected) => ({
+      fontSize: "20px",
+      color: isSelected ? "#ffffff" : "#3d0420", // Change color to white when selected
+      fontFamily: '"Brawler", serif',
+    }),
     textArea: {
       width: "100%",
       marginTop: "20px",
       marginBottom: "20px",
+      backgroundColor: "white",
     },
     subEventContainer: {
       marginTop: "20px",
       textAlign: "left",
     },
     subEventHeading: {
-      fontSize: "20px",
+      fontSize: "30px",
       fontWeight: "bold",
-      color: "#c00",
+      color: "#3d0420",
       marginBottom: "10px",
-      fontFamily: '"Playfair Display", serif',
+      fontFamily: '"Brawler", serif',
+    },
+
+    buttonNext: {
+      backgroundColor: "#3d0420", // Primary background color
+      color: "#ffffff", // Text color
+      border: "1px solid transparent", // Border color
+      padding: "12px 30px", // Padding for the button
+      fontSize: "16px", // Font size
+      cursor: "pointer", // Cursor style
+      borderRadius: "30px", // Rounded corners
+      fontWeight: "600", // Bold font weight
+      transition: "background-color 0.3s ease", // Smooth hover transition
+      textDecoration: "none", // Remove text decoration (e.g., underlines)
+      fontFamily: '"Bank Gothic", sans-serif',
+      marginBottom: "10px",
+    },
+
+    // Hover effect for the button
+    buttonHoverNext: {
+      backgroundColor: "#d4a373", // Dark background on hover
+    },
+    buttonBack: {
+      backgroundColor: "#3d0420", // Primary background color
+      color: "#ffffff", // Text color
+      border: "1px solid transparent", // Border color
+      padding: "12px 30px", // Padding for the button
+      fontSize: "16px", // Font size
+      cursor: "pointer", // Cursor style
+      borderRadius: "30px", // Rounded corners
+      fontWeight: "600", // Bold font weight
+      transition: "background-color 0.3s ease", // Smooth hover transition
+      textDecoration: "none", // Remove text decoration (e.g., underlines)
+      fontFamily: '"Bank Gothic", sans-serif',
+      marginRight: "10px",
+      marginBottom: "10px",
+    },
+
+    // Hover effect for the button
+    buttonHoverBack: {
+      backgroundColor: "#d4a373", // Dark background on hover
+    },
+    buttonConfirm: {
+      backgroundColor: "#ae441d", // Primary background color
+      color: "#ffffff", // Text color
+      border: "1px solid transparent", // Border color
+      padding: "12px 30px", // Padding for the button
+      fontSize: "16px", // Font size
+      cursor: "pointer", // Cursor style
+      borderRadius: "30px", // Rounded corners
+      fontWeight: "600", // Bold font weight
+      transition: "background-color 0.3s ease", // Smooth hover transition
+      textDecoration: "none", // Remove text decoration (e.g., underlines)
+      fontFamily: '"Bank Gothic", sans-serif',
+      marginBottom: "10px",
+    },
+
+    // Hover effect for the button
+    buttonHoverConfirm: {
+      backgroundColor: "#104136", // Dark background on hover
     },
   };
 
@@ -160,10 +234,15 @@ const WasnaPalace = () => {
     photographyRemarks: "",
     confirmationRemarks: "",
   });
+  const [menuPrice, setMenuPrice] = useState(0);
+  const [eventPrice, setEventPrice] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Check login status
   const [userReceipts, setUserReceipts] = useState([]); // Store user receipts
   const [currentSubEvent, setCurrentSubEvent] = useState("");
+  const [isHoveredNext, setIsHoveredNext] = useState(false);
+  const [isHoveredBack, setIsHoveredBack] = useState(false);
+  const [isHoveredConfirm, setIsHoveredConfirm] = useState(false);
 
   useEffect(() => {
     const checkLoginAndFetchReceipts = async () => {
@@ -267,30 +346,44 @@ const WasnaPalace = () => {
       step === 5 ? "" : formData.photography // Reset photography if step is 5
     );
   };
-  const calculateTotalPrice = (updatedSubEvents, decor, photography) => {
-    let price = 0;
 
+  const calculateTotalPrice = (updatedSubEvents, decor, photography) => {
+    let menuCost = 0;
+    let eventCost = 0;
+
+    // Calculate menu prices
     Object.values(updatedSubEvents).forEach((menus) => {
       menus.forEach((menu) => {
-        price += menu.addPrice;
+        menuCost += menu.addPrice; // Use `menu.price` instead of `menu.addPrice` if `price` is the correct property
       });
     });
 
+    // Calculate decor cost
     if (decor) {
       const decorOption = decorOptions.find((d) => d.name === decor);
-      if (decorOption) price += decorOption.addPrice;
+      if (decorOption) {
+        eventCost += decorOption.price; // Use `price` if that's the correct property
+      }
     }
 
+    // Calculate photography cost
     if (photography) {
-      const photographyOption = photographyPackages.find(
-        (p) => p.name === photography
-      );
-      if (photographyOption) price += photographyOption.addPrice;
+      for (const packageType of photographyPackages) {
+        const foundPackage = packageType.packages.find(
+          (pkg) => pkg.name === photography
+        );
+        if (foundPackage) {
+          eventCost += foundPackage.addPrice; // Use `price` if that's the correct property
+          break;
+        }
+      }
     }
 
-    setTotalPrice(price);
+    // Update the state with calculated values
+    setMenuPrice(menuCost);
+    setEventPrice(eventCost);
+    setTotalPrice(menuCost + eventCost); // Update the total price
   };
-
   const handleSubmit = async () => {
     try {
       const token = localStorage.getItem("token"); // Assuming JWT is stored in localStorage
@@ -353,18 +446,21 @@ const WasnaPalace = () => {
         return (
           <Box>
             {Object.entries(eventOptions).map(
-              ([eventType, { description }]) => (
-                <Box
-                  key={eventType}
-                  style={styles.card(formData.eventType === eventType)}
-                  onClick={() => handleSelect("eventType", eventType)}
-                >
-                  <Typography style={styles.cardText}>{eventType}</Typography>
-                  <Typography style={styles.descriptionText}>
-                    {description}
-                  </Typography>
-                </Box>
-              )
+              ([eventType, { description }]) => {
+                const isSelected = formData.eventType === eventType;
+                return (
+                  <Box
+                    key={eventType}
+                    style={styles.card(isSelected)}
+                    onClick={() => handleSelect("eventType", eventType)}
+                  >
+                    <Typography style={styles.cardText}>{eventType}</Typography>
+                    <Typography style={styles.descriptionText(isSelected)}>
+                      {description}
+                    </Typography>
+                  </Box>
+                );
+              }
             )}
           </Box>
         );
@@ -373,18 +469,21 @@ const WasnaPalace = () => {
           <Box>
             {Object.entries(
               eventOptions[formData.eventType]?.subEvents || {}
-            ).map(([subEvent, description]) => (
-              <Box
-                key={subEvent}
-                style={styles.card(formData.subEvents[subEvent])}
-                onClick={() => handleSelect("subEvents", subEvent)}
-              >
-                <Typography style={styles.cardText}>{subEvent}</Typography>
-                <Typography style={styles.descriptionText}>
-                  {description}
-                </Typography>
-              </Box>
-            ))}
+            ).map(([subEvent, description]) => {
+              const isSelected = Boolean(formData.subEvents[subEvent]);
+              return (
+                <Box
+                  key={subEvent}
+                  style={styles.card(isSelected)}
+                  onClick={() => handleSelect("subEvents", subEvent)}
+                >
+                  <Typography style={styles.cardText}>{subEvent}</Typography>
+                  <Typography style={styles.descriptionText(isSelected)}>
+                    {description}
+                  </Typography>
+                </Box>
+              );
+            })}
           </Box>
         );
       case 3:
@@ -392,15 +491,18 @@ const WasnaPalace = () => {
           <Box>
             {/* Display list of sub-events to select */}
             <Box>
-              {Object.keys(formData.subEvents).map((subEvent) => (
-                <Box
-                  key={subEvent}
-                  style={styles.card(currentSubEvent === subEvent)}
-                  onClick={() => setCurrentSubEvent(subEvent)} // Set the current sub-event
-                >
-                  <Typography style={styles.cardText}>{subEvent}</Typography>
-                </Box>
-              ))}
+              {Object.keys(formData.subEvents).map((subEvent) => {
+                const isSelected = currentSubEvent === subEvent;
+                return (
+                  <Box
+                    key={subEvent}
+                    style={styles.card(isSelected)}
+                    onClick={() => setCurrentSubEvent(subEvent)}
+                  >
+                    <Typography style={styles.cardText}>{subEvent}</Typography>
+                  </Box>
+                );
+              })}
             </Box>
 
             {/* Show menus only for the currently selected sub-event */}
@@ -409,37 +511,42 @@ const WasnaPalace = () => {
                 <Typography style={styles.subEventHeading}>
                   {currentSubEvent} - Select Menu
                 </Typography>
-                {(menus[currentSubEvent] || []).map((menu) => (
-                  <Box
-                    key={menu.name}
-                    style={styles.card(
-                      formData.subEvents[currentSubEvent]?.find(
-                        (m) => m.name === menu.name
-                      )
-                    )}
-                    onClick={() => handleMenuSelect(currentSubEvent, menu)}
-                  >
-                    <Typography style={styles.cardText}>{menu.name}</Typography>
+                {(menus[currentSubEvent] || []).map((menu) => {
+                  const isSelected = Boolean(
+                    formData.subEvents[currentSubEvent]?.find(
+                      (m) => m.name === menu.name
+                    )
+                  );
+                  return (
+                    <Box
+                      key={menu.name}
+                      style={styles.card(isSelected)}
+                      onClick={() => handleMenuSelect(currentSubEvent, menu)}
+                    >
+                      <Typography style={styles.cardText}>
+                        {menu.name}
+                      </Typography>
 
-                    {/* Render description items as separate lines */}
-                    {menu.description && Array.isArray(menu.description) && (
-                      <Box style={{ marginTop: "10px" }}>
-                        {menu.description.map((desc, index) => (
-                          <Typography
-                            key={index}
-                            style={styles.descriptionText}
-                          >
-                            {desc}
-                          </Typography>
-                        ))}
-                      </Box>
-                    )}
+                      {/* Render description items as separate lines */}
+                      {menu.description && Array.isArray(menu.description) && (
+                        <Box style={{ marginTop: "10px" }}>
+                          {menu.description.map((desc, index) => (
+                            <Typography
+                              key={index}
+                              style={styles.descriptionText(isSelected)}
+                            >
+                              {desc}
+                            </Typography>
+                          ))}
+                        </Box>
+                      )}
 
-                    <Typography style={styles.priceText}>
-                      Price: RS. {menu.price}
-                    </Typography>
-                  </Box>
-                ))}
+                      <Typography style={styles.priceText}>
+                        Price: RS. {menu.price}
+                      </Typography>
+                    </Box>
+                  );
+                })}
               </Box>
             )}
 
@@ -462,25 +569,31 @@ const WasnaPalace = () => {
       case 4:
         return (
           <Box>
-            {decorOptions.map((decor) => (
-              <Box
-                key={decor.name}
-                style={styles.card(formData.decor === decor.name)}
-                onClick={() => {
-                  handleSelect("decor", decor.name);
-                  calculateTotalPrice(
-                    formData.subEvents,
-                    decor.name,
-                    formData.photography
-                  );
-                }}
-              >
-                <Typography style={styles.cardText}>{decor.name}</Typography>
-                <Typography style={styles.priceText}>
-                  Price: RS. {decor.price}
-                </Typography>
-              </Box>
-            ))}
+            {decorOptions.map((decor) => {
+              const isSelected = formData.decor === decor.name;
+              return (
+                <Box
+                  key={decor.name}
+                  style={styles.card(isSelected)}
+                  onClick={() => {
+                    handleSelect("decor", decor.name);
+                    calculateTotalPrice(
+                      formData.subEvents,
+                      decor.name,
+                      formData.photography
+                    );
+                  }}
+                >
+                  <Typography style={styles.cardText}>{decor.name}</Typography>
+                  <Typography style={styles.descriptionText(isSelected)}>
+                    {decor.description}
+                  </Typography>
+                  <Typography style={styles.priceText}>
+                    Price: RS. {decor.price}
+                  </Typography>
+                </Box>
+              );
+            })}
             {/* Additional Remarks */}
             <Box style={{ marginTop: "20px" }}>
               <TextField
@@ -503,9 +616,10 @@ const WasnaPalace = () => {
               variant="h5"
               style={{
                 fontWeight: "bold",
-                color: "#c00",
+                color: "#3d0420",
                 marginBottom: "10px",
-                fontFamily: '"Playfair Display", serif',
+                fontFamily: '"Americana", regular',
+                fontSize: "40px",
               }}
             >
               Select Photography Package
@@ -517,32 +631,37 @@ const WasnaPalace = () => {
                   {packageType.type} Packages
                 </Typography>
 
-                {packageType.packages.map((pkg) => (
-                  <Box
-                    key={pkg.name}
-                    style={styles.card(formData.photography === pkg.name)}
-                    onClick={() => handleSelect("photography", pkg.name)}
-                  >
-                    <Typography style={styles.cardText}>{pkg.name}</Typography>
+                {packageType.packages.map((pkg) => {
+                  const isSelected = formData.photography === pkg.name;
+                  return (
+                    <Box
+                      key={pkg.name}
+                      style={styles.card(isSelected)}
+                      onClick={() => handleSelect("photography", pkg.name)}
+                    >
+                      <Typography style={styles.cardText}>
+                        {pkg.name}
+                      </Typography>
 
-                    {pkg.description && Array.isArray(pkg.description) && (
-                      <Box style={{ marginTop: "10px" }}>
-                        {pkg.description.map((desc, index) => (
-                          <Typography
-                            key={index}
-                            style={styles.descriptionText}
-                          >
-                            {desc}
-                          </Typography>
-                        ))}
-                      </Box>
-                    )}
+                      {pkg.description && Array.isArray(pkg.description) && (
+                        <Box style={{ marginTop: "10px" }}>
+                          {pkg.description.map((desc, index) => (
+                            <Typography
+                              key={index}
+                              style={styles.descriptionText(isSelected)}
+                            >
+                              {desc}
+                            </Typography>
+                          ))}
+                        </Box>
+                      )}
 
-                    <Typography style={styles.priceText}>
-                      Price: RS. {pkg.price}
-                    </Typography>
-                  </Box>
-                ))}
+                      <Typography style={styles.priceText}>
+                        Price: RS. {pkg.price}
+                      </Typography>
+                    </Box>
+                  );
+                })}
               </Box>
             ))}
 
@@ -572,7 +691,7 @@ const WasnaPalace = () => {
               style={{
                 fontWeight: "bold",
                 marginBottom: "20px",
-                color: "#c00",
+                color: "#ae441d",
               }}
             >
               Review Your Booking Details
@@ -592,44 +711,86 @@ const WasnaPalace = () => {
                     variant="h6"
                     style={{ fontWeight: "bold", color: "#333" }}
                   >
-                    <span style={{ color: "#c00" }}>Event Type:</span>{" "}
-                    {formData.eventType}
+                    <span style={{ color: "#ae441d" }}>Event Type:</span>{" "}
+                    {formData.eventType || (
+                      <span style={{ color: "#aaa" }}>
+                        No option selected. You can decide later.
+                      </span>
+                    )}
                   </Typography>
                 </li>
-
                 {/* Sub-Events */}
                 <li style={{ marginBottom: "15px" }}>
                   <Typography
                     variant="h6"
                     style={{ fontWeight: "bold", color: "#333" }}
                   >
-                    <span style={{ color: "#c00" }}>Sub-Events:</span>
+                    <span style={{ color: "#ae441d" }}>Sub-Events:</span>
                   </Typography>
-                  {Object.keys(formData.subEvents).map((subEvent) => (
-                    <Box key={subEvent} style={{ marginTop: "10px" }}>
-                      <Typography
-                        variant="body1"
-                        style={{ fontWeight: "bold", color: "#333" }}
-                      >
-                        {subEvent}
-                      </Typography>
-                      <Box style={{ paddingLeft: "20px" }}>
-                        {formData.subEvents[subEvent].map((menu) => (
-                          <div key={menu.name} style={{ marginBottom: "10px" }}>
+                  {Object.keys(formData.subEvents).length > 0 ? (
+                    Object.keys(formData.subEvents).map((subEvent) => (
+                      <Box key={subEvent} style={{ marginTop: "10px" }}>
+                        <Typography
+                          variant="body1"
+                          style={{ fontWeight: "bold", color: "#333" }}
+                        >
+                          {subEvent}
+                        </Typography>
+                        <Box style={{ paddingLeft: "20px" }}>
+                          {formData.subEvents[subEvent].length > 0 ? (
+                            formData.subEvents[subEvent].map((menu) => (
+                              <div
+                                key={menu.name}
+                                style={{ marginBottom: "10px" }}
+                              >
+                                <Typography
+                                  variant="body2"
+                                  style={{ color: "#555" }}
+                                >
+                                  <strong>{menu.name}</strong> - Price:{" "}
+                                  <span style={{ color: "#d4a373" }}>
+                                    RS. {menu.price}
+                                  </span>
+                                </Typography>
+                              </div>
+                            ))
+                          ) : (
                             <Typography
-                              variant="body2"
-                              style={{ color: "#555" }}
+                              style={{
+                                color: "#aaa",
+                                marginTop: "10px",
+                                fontStyle: "italic",
+                              }}
                             >
-                              <strong>{menu.name}</strong> - Price:{" "}
-                              <span style={{ color: "#d4a373" }}>
-                                RS. {menu.price}
-                              </span>
+                              No menus selected. You can decide later.
                             </Typography>
-                          </div>
-                        ))}
+                          )}
+                        </Box>
                       </Box>
-                    </Box>
-                  ))}
+                    ))
+                  ) : (
+                    <Typography style={{ color: "#aaa", marginTop: "10px" }}>
+                      No sub-events selected. You can decide later.
+                    </Typography>
+                  )}
+                </li>
+
+                <li style={{ marginBottom: "20px" }}>
+                  <Typography
+                    variant="h6"
+                    style={{
+                      fontWeight: "bold",
+                      color: "#333",
+                      borderBottom: "2px solid #ae441d",
+                      paddingBottom: "10px",
+                      marginBottom: "15px",
+                    }}
+                  >
+                    <span style={{ color: "#ae441d" }}>Menu Cost:</span>{" "}
+                    <span style={{ color: "#d4a373", fontWeight: "bold" }}>
+                      RS. {menuPrice} Per Plate
+                    </span>
+                  </Typography>
                 </li>
 
                 {/* Decor */}
@@ -638,12 +799,12 @@ const WasnaPalace = () => {
                     variant="h6"
                     style={{ fontWeight: "bold", color: "#333" }}
                   >
-                    <span style={{ color: "#c00" }}>Decor:</span>
+                    <span style={{ color: "#ae441d" }}>Decor:</span>{" "}
                     {formData.decor ? (
                       <>
                         <span style={{ fontWeight: "bold", color: "#333" }}>
                           {formData.decor}
-                        </span>
+                        </span>{" "}
                         - Price:{" "}
                         <span style={{ color: "#d4a373" }}>
                           RS.{" "}
@@ -654,50 +815,73 @@ const WasnaPalace = () => {
                         </span>
                       </>
                     ) : (
-                      <span style={{ color: "#aaa" }}>Not selected</span>
+                      <span style={{ color: "#aaa" }}>
+                        No option selected. You can decide later.
+                      </span>
                     )}
                   </Typography>
                 </li>
-
                 {/* Photography */}
                 <li style={{ marginBottom: "20px" }}>
                   <Typography
                     variant="h6"
                     style={{ fontWeight: "bold", color: "#333" }}
                   >
-                    <span style={{ color: "#c00" }}>Photography:</span>
+                    <span style={{ color: "#ae441d" }}>Photography:</span>{" "}
                     {formData.photography ? (
                       <>
                         <span style={{ fontWeight: "bold", color: "#333" }}>
                           {formData.photography}
-                        </span>
+                        </span>{" "}
                         - Price:{" "}
                         <span style={{ color: "#d4a373" }}>
                           RS.{" "}
-                          {
-                            photographyPackages.find(
-                              (p) => p.name === formData.photography
-                            )?.price
-                          }
+                          {(() => {
+                            for (const packageType of photographyPackages) {
+                              const foundPackage = packageType.packages.find(
+                                (pkg) => pkg.name === formData.photography
+                              );
+                              if (foundPackage) {
+                                return foundPackage.addPrice;
+                              }
+                            }
+                            return 0;
+                          })()}
                         </span>
                       </>
                     ) : (
-                      <span style={{ color: "#aaa" }}>Not selected</span>
+                      <span style={{ color: "#aaa" }}>
+                        No option selected. You can decide later.
+                      </span>
                     )}
                   </Typography>
                 </li>
-
-                {/* Total Price */}
-                <li>
+                {() => {
+                  handleSelect("photography", photographyPackages.name);
+                  calculateTotalPrice(
+                    formData.subEvents,
+                    formData.decor,
+                    photographyPackages.name
+                  );
+                }}
+                {/* Event Cost */}
+                <li style={{ marginBottom: "20px" }}>
                   <Typography
                     variant="h6"
-                    style={{ fontWeight: "bold", color: "#333" }}
+                    style={{
+                      fontWeight: "bold",
+                      color: "#333",
+                      borderBottom: "2px solid #ae441d",
+                      paddingBottom: "10px",
+                      marginBottom: "15px",
+                    }}
                   >
-                    <span style={{ color: "#c00" }}>Total Price:</span>
+                    <span style={{ color: "#ae441d" }}>Event Cost:</span>{" "}
                     <span style={{ color: "#d4a373", fontWeight: "bold" }}>
-                      RS. {totalPrice}
+                      RS. {eventPrice}
                     </span>
                   </Typography>
+                  <Box style={{ paddingLeft: "20px" }}></Box>
                 </li>
               </ul>
             </Box>
@@ -763,8 +947,14 @@ const WasnaPalace = () => {
                 onClick={() => {
                   resetCurrentStep(activeStep); // Reset current step options
                   setActiveStep((prev) => prev - 1); // Move to the previous step
+                  window.scrollTo({ top: 0, behavior: "smooth" }); // Scroll to the top
                 }}
-                style={{ marginRight: "10px", backgroundColor: "#d4a373" }}
+                style={{
+                  ...styles.buttonBack,
+                  ...(isHoveredBack ? styles.buttonHoverBack : {}),
+                }}
+                onMouseEnter={() => setIsHoveredBack(true)}
+                onMouseLeave={() => setIsHoveredBack(false)}
               >
                 Back
               </Button>
@@ -772,16 +962,32 @@ const WasnaPalace = () => {
             {activeStep < 6 ? (
               <Button
                 variant="contained"
-                onClick={() => setActiveStep((prev) => prev + 1)}
-                style={{ backgroundColor: "#d4a373" }}
+                onClick={() => {
+                  setActiveStep((prev) => prev + 1); // Move to the next step
+                  window.scrollTo({ top: 0, behavior: "smooth" }); // Scroll to the top
+                }}
+                style={{
+                  ...styles.buttonNext,
+                  ...(isHoveredNext ? styles.buttonHoverNext : {}),
+                }}
+                onMouseEnter={() => setIsHoveredNext(true)}
+                onMouseLeave={() => setIsHoveredNext(false)}
               >
                 Next →
               </Button>
             ) : (
               <Button
                 variant="contained"
-                style={{ backgroundColor: "#d4a373" }}
-                onClick={() => handleSubmit()}
+                onClick={() => {
+                  handleSubmit(); // Perform submission
+                  window.scrollTo({ top: 0, behavior: "smooth" }); // Scroll to the top
+                }}
+                style={{
+                  ...styles.buttonConfirm,
+                  ...(isHoveredConfirm ? styles.buttonHoverConfirm : {}),
+                }}
+                onMouseEnter={() => setIsHoveredConfirm(true)}
+                onMouseLeave={() => setIsHoveredConfirm(false)}
               >
                 Confirm
               </Button>
