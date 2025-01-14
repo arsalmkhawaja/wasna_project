@@ -6,17 +6,35 @@ import eventOptions from "../Data/Events";
 import menus from "../Data/MenuData";
 import decorOptions from "../Data/DecorOptions";
 import photographyPackages from "../Data/PhotographyPackages";
+import bgImage from "../assets/Background.jpg";
 
 const WasnaPalace = () => {
   const styles = {
     bookingPage: {
       fontFamily: '"Playfair Display", serif',
       textAlign: "center",
-      padding: "20px",
       minHeight: "100vh",
-      marginTop: "100px",
+      marginTop: "75px",
       overflow: "hidden",
+      position: "relative", // Required for the overlay div
+      backgroundImage: `url(${bgImage})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      backgroundAttachment: "fixed",
     },
+
+    // New overlay style for the blurred effect
+    blurOverlay: {
+      content: '""',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      minHeight: "100vh",
+      background: "rgba(0, 0, 0, 0.2)", // Dark overlay
+      backdropFilter: "blur(5px)", // Apply the blur effect
+    },
+
     heading: {
       fontSize: "36px",
       margin: "20px 0",
@@ -47,7 +65,7 @@ const WasnaPalace = () => {
       left: "5%",
       height: "4px",
       background: "#c00",
-      width: `${18 * (activeStep - 1)}%`, // Adjust width based on active step
+      width: `${17.8 * (activeStep - 1)}%`, // Adjust width based on active step
       transform: "translateY(-50%)", // Keep it aligned vertically
     }),
     stepContainer: {
@@ -171,11 +189,27 @@ const WasnaPalace = () => {
   const handleSelect = (field, value) => {
     if (field === "subEvents") {
       const updatedSubEvents = { ...formData.subEvents };
-      if (updatedSubEvents[value]) {
-        delete updatedSubEvents[value];
+
+      // For wedding events, allow multiple selections
+      if (formData.eventType === "Wedding") {
+        if (updatedSubEvents[value]) {
+          delete updatedSubEvents[value];
+        } else {
+          updatedSubEvents[value] = [];
+        }
       } else {
-        updatedSubEvents[value] = [];
+        // For non-wedding events, only allow one selection
+        if (updatedSubEvents[value]) {
+          delete updatedSubEvents[value];
+        } else {
+          // Clear previous selections and set new one
+          Object.keys(updatedSubEvents).forEach(
+            (key) => delete updatedSubEvents[key]
+          );
+          updatedSubEvents[value] = [];
+        }
       }
+
       setFormData({ ...formData, subEvents: updatedSubEvents });
     } else {
       setFormData({ ...formData, [field]: value });
@@ -185,15 +219,9 @@ const WasnaPalace = () => {
   const handleMenuSelect = (subEvent, menu) => {
     const updatedSubEvents = { ...formData.subEvents };
     if (!updatedSubEvents[subEvent]) updatedSubEvents[subEvent] = [];
-    const menuIndex = updatedSubEvents[subEvent].findIndex(
-      (m) => m.name === menu.name
-    );
 
-    if (menuIndex > -1) {
-      updatedSubEvents[subEvent].splice(menuIndex, 1);
-    } else {
-      updatedSubEvents[subEvent].push(menu);
-    }
+    // Replace existing menu with new selection
+    updatedSubEvents[subEvent] = [menu];
 
     setFormData({ ...formData, subEvents: updatedSubEvents });
     calculateTotalPrice(updatedSubEvents, formData.decor, formData.photography);
@@ -700,63 +728,65 @@ const WasnaPalace = () => {
   return (
     <div>
       <div style={styles.bookingPage}>
-        <Helmet>
-          <title>Wasna Palace - Book Your Event</title>
-        </Helmet>
-        <h1 style={styles.heading}>Book Now</h1>
-        <div style={styles.progressBarContainer}>
-          <div style={styles.progressLine}></div>
-          <div style={styles.activeLine(activeStep)}></div>
-          {[
-            "Event Type",
-            "Sub-Event",
-            "Menu",
-            "Decor",
-            "Photography",
-            "Confirmation",
-          ].map((label, index) => (
-            <div key={index} style={styles.stepContainer}>
-              <div style={styles.stepCircle(index + 1 === activeStep)}>
-                {index + 1}
+        <div style={styles.blurOverlay}>
+          <h1 style={styles.heading}>Book Now</h1>
+          <Helmet>
+            <title>Wasna Palace - Book Your Event</title>
+          </Helmet>
+
+          <div style={styles.progressBarContainer}>
+            <div style={styles.progressLine}></div>
+            <div style={styles.activeLine(activeStep)}></div>
+            {[
+              "Event Type",
+              "Sub-Event",
+              "Menu",
+              "Decor",
+              "Photography",
+              "Confirmation",
+            ].map((label, index) => (
+              <div key={index} style={styles.stepContainer}>
+                <div style={styles.stepCircle(index + 1 === activeStep)}>
+                  {index + 1}
+                </div>
+                <div style={styles.stepLabel(index + 1 === activeStep)}>
+                  {label}
+                </div>
               </div>
-              <div style={styles.stepLabel(index + 1 === activeStep)}>
-                {label}
-              </div>
-            </div>
-          ))}
-        </div>
-        <form style={styles.form}>{renderForm()}</form>
-        <div>
-          {activeStep > 1 && (
-            <Button
-              variant="contained"
-              onClick={() => {
-                resetCurrentStep(activeStep); // Reset current step options
-                setActiveStep((prev) => prev - 1); // Move to the previous step
-              }}
-              style={{ marginRight: "10px", backgroundColor: "#d4a373" }}
-            >
-              Back
-            </Button>
-          )}
-          {/* Next Button */}
-          {activeStep < 6 ? (
-            <Button
-              variant="contained"
-              onClick={() => setActiveStep((prev) => prev + 1)}
-              style={{ backgroundColor: "#d4a373" }}
-            >
-              Next →
-            </Button>
-          ) : (
-            <Button
-              variant="contained"
-              style={{ backgroundColor: "#d4a373" }}
-              onClick={() => handleSubmit()}
-            >
-              Confirm
-            </Button>
-          )}
+            ))}
+          </div>
+          <form style={styles.form}>{renderForm()}</form>
+          <div>
+            {activeStep > 1 && (
+              <Button
+                variant="contained"
+                onClick={() => {
+                  resetCurrentStep(activeStep); // Reset current step options
+                  setActiveStep((prev) => prev - 1); // Move to the previous step
+                }}
+                style={{ marginRight: "10px", backgroundColor: "#d4a373" }}
+              >
+                Back
+              </Button>
+            )}
+            {activeStep < 6 ? (
+              <Button
+                variant="contained"
+                onClick={() => setActiveStep((prev) => prev + 1)}
+                style={{ backgroundColor: "#d4a373" }}
+              >
+                Next →
+              </Button>
+            ) : (
+              <Button
+                variant="contained"
+                style={{ backgroundColor: "#d4a373" }}
+                onClick={() => handleSubmit()}
+              >
+                Confirm
+              </Button>
+            )}
+          </div>
         </div>
       </div>
     </div>
