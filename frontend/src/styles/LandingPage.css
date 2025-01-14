@@ -1,19 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Brawler:wght@400&family=Playfair+Display:wght@700&family=Lato:wght@400;700&display=swap');
 
 /* Custom font imports */
-@font-face {
-  font-family: 'Americanana';
-  src: url('../assets/Americana\ Font\ Regular.otf') format('woff2'); /* Replace with actual URL */
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Bank Gothic';
-  src: url('../assets/Bank\ Gothic\ Light\ Regular.otf') format('woff2'); /* Replace with actual URL */
-  font-weight: 400;
-  font-style: normal;
-}
 
 :root {
   --primary-color: #d4a373; /* Gold */

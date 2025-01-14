@@ -46,7 +46,6 @@ const EventComplex = () => {
     flexDirection: "column",
     alignItems: "center",
     padding: "20px",
-    fontFamily: '"Playfair Display", serif',
     minHeight: "100vh",
     marginTop: "100px",
   };
@@ -64,12 +63,12 @@ const EventComplex = () => {
   };
 
   const headingStyle = {
-    fontSize: "36px",
+    fontSize: "56px",
+    margin: "20px 10px",
     fontWeight: "bold",
-    marginBottom: "20px",
-    textAlign: "center",
-    color: "#d4a373",
-    fontFamily: '"Playfair Display", serif',
+    color: "#3d0420",
+    fontFamily: '"Americana", regular',
+    textShadow: "4px 4px 10px rgba(0, 0, 0, 0.7)",
   };
 
   const innerContainerStyle = {
@@ -109,32 +108,35 @@ const EventComplex = () => {
     color: "#d4a373",
     textShadow: "1px 1px 5px rgba(0, 0, 0, 0.7)",
     maxWidth: "80%",
-    backgroundColor: "rgba(0, 31, 63, 0.8)",
+    backgroundColor: "rgb(61, 4, 32, 0.9)",
     padding: "10px",
     borderRadius: "5px",
+    fontFamily: '"Americana", regular',
   };
 
   const imageTextStyle = {
     textAlign: "center",
-    color: "#d4a373",
+    color: "#104136",
     fontSize: "18px",
     marginTop: "10px",
-    fontFamily: '"Playfair Display", serif',
   };
 
   const buttonStyle = {
-    padding: "10px 20px",
-    backgroundColor: "#b55850",
-    border: "none",
-    cursor: "pointer",
-    fontSize: "14px",
-    transition: "background-color 0.3s ease",
-    borderRadius: "3px",
-    fontFamily: '"Playfair Display", serif',
+    backgroundColor: "#d4a373", // Primary background color
+    color: "#ffffff", // Text color
+    border: "1px solid transparent", // Border color
+    padding: "12px 30px", // Padding for the button
+    fontSize: "16px", // Font size
+    cursor: "pointer", // Cursor style
+    borderRadius: "30px", // Rounded corners
+    fontWeight: "600", // Bold font weight
+    transition: "background-color 0.3s ease", // Smooth hover transition
+    textDecoration: "none", // Remove text decoration (e.g., underlines)
+    fontFamily: '"Bank Gothic", sans-serif',
   };
 
   const buttonHoverStyle = {
-    backgroundColor: "#ffffff",
+    backgroundColor: "#104136",
   };
 
   return (
@@ -177,6 +179,9 @@ const EventComplex = () => {
             display: "flex",
             justifyContent: "space-between",
             marginTop: "10px",
+            fontFamily: '"Brawler", serif',
+            fontWeight: "bolder",
+            fontSize: "20px",
           }}
         >
           {images.map((image, index) => (

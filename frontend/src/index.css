@@ -11,3 +11,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+@font-face {
+  font-family: 'Americanana';
+  src: url('../src/assets/Americana\ Font\ Regular.otf') format('woff2'); /* Replace with actual URL */
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Bank Gothic';
+  src: url('../src/assets/Bank\ Gothic\ Light\ Regular.otf') format('woff2'); /* Replace with actual URL */
+  font-weight: 400;
+  font-style: normal;
+}
