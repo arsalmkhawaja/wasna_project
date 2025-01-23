@@ -114,15 +114,22 @@ const WasnaPalace = () => {
       marginTop: "40px",
       transition: "transform 0.5s ease",
     },
-    card: (isSelected) => ({
+    card: (isSelected, isHovered) => ({
       width: "80%",
       padding: "20px",
       margin: "20px auto",
       borderRadius: "12px",
-      background: isSelected ? "rgba(61, 4, 32, 0.9)" : "#fff", // Lightened golden background
-      backdropFilter: "blur(5px)", // Increased blur effect
+      background: isSelected
+        ? "rgba(61, 4, 32, 0.9)"
+        : isHovered
+        ? "rgba(61, 4, 32, 0.7)"
+        : "#fff",
+      backdropFilter: "blur(5px)",
       border: isSelected ? "2px solid #3d0420" : "2px solid transparent",
-      // boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+      transform: isHovered ? "scale(1.02)" : "scale(1)",
+      boxShadow: isHovered
+        ? "0 8px 16px rgba(0, 0, 0, 0.3)"
+        : "0 4px 8px rgba(0, 0, 0, 0.2)",
       cursor: "pointer",
       transition: "all 0.3s ease",
       textAlign: "center",
@@ -140,9 +147,9 @@ const WasnaPalace = () => {
       color: "#d4a373",
       fontFamily: '"Bank Gothic", sans-serif',
     },
-    descriptionText: (isSelected) => ({
+    descriptionText: (isSelected, isHovered) => ({
       fontSize: "20px",
-      color: isSelected ? "#ffffff" : "#3d0420", // Change color to white when selected
+      color: isSelected || isHovered ? "#ffffff" : "#3d0420",
       fontFamily: '"Brawler", serif',
     }),
     textArea: {
@@ -222,7 +229,7 @@ const WasnaPalace = () => {
       backgroundColor: "#104136", // Dark background on hover
     },
   };
-
+  const [hoveredCard, setHoveredCard] = useState(null);
   const [activeStep, setActiveStep] = useState(1);
   const [formData, setFormData] = useState({
     eventType: "",
@@ -451,11 +458,18 @@ const WasnaPalace = () => {
                 return (
                   <Box
                     key={eventType}
-                    style={styles.card(isSelected)}
+                    style={styles.card(isSelected, hoveredCard === eventType)}
+                    onMouseEnter={() => setHoveredCard(eventType)}
+                    onMouseLeave={() => setHoveredCard(null)}
                     onClick={() => handleSelect("eventType", eventType)}
                   >
                     <Typography style={styles.cardText}>{eventType}</Typography>
-                    <Typography style={styles.descriptionText(isSelected)}>
+                    <Typography
+                      style={styles.descriptionText(
+                        isSelected,
+                        hoveredCard === eventType
+                      )}
+                    >
                       {description}
                     </Typography>
                   </Box>
@@ -474,11 +488,18 @@ const WasnaPalace = () => {
               return (
                 <Box
                   key={subEvent}
-                  style={styles.card(isSelected)}
+                  style={styles.card(isSelected, hoveredCard === subEvent)}
+                  onMouseEnter={() => setHoveredCard(subEvent)}
+                  onMouseLeave={() => setHoveredCard(null)}
                   onClick={() => handleSelect("subEvents", subEvent)}
                 >
                   <Typography style={styles.cardText}>{subEvent}</Typography>
-                  <Typography style={styles.descriptionText(isSelected)}>
+                  <Typography
+                    style={styles.descriptionText(
+                      isSelected,
+                      hoveredCard === subEvent
+                    )}
+                  >
                     {description}
                   </Typography>
                 </Box>
@@ -520,7 +541,9 @@ const WasnaPalace = () => {
                   return (
                     <Box
                       key={menu.name}
-                      style={styles.card(isSelected)}
+                      style={styles.card(isSelected, hoveredCard === menu.name)}
+                      onMouseEnter={() => setHoveredCard(menu.name)}
+                      onMouseLeave={() => setHoveredCard(null)}
                       onClick={() => handleMenuSelect(currentSubEvent, menu)}
                     >
                       <Typography style={styles.cardText}>
@@ -533,7 +556,10 @@ const WasnaPalace = () => {
                           {menu.description.map((desc, index) => (
                             <Typography
                               key={index}
-                              style={styles.descriptionText(isSelected)}
+                              style={styles.descriptionText(
+                                isSelected,
+                                hoveredCard === menu.name
+                              )}
                             >
                               {desc}
                             </Typography>
@@ -574,7 +600,9 @@ const WasnaPalace = () => {
               return (
                 <Box
                   key={decor.name}
-                  style={styles.card(isSelected)}
+                  style={styles.card(isSelected, hoveredCard === decor.name)}
+                  onMouseEnter={() => setHoveredCard(decor.name)}
+                  onMouseLeave={() => setHoveredCard(null)}
                   onClick={() => {
                     handleSelect("decor", decor.name);
                     calculateTotalPrice(
@@ -585,7 +613,12 @@ const WasnaPalace = () => {
                   }}
                 >
                   <Typography style={styles.cardText}>{decor.name}</Typography>
-                  <Typography style={styles.descriptionText(isSelected)}>
+                  <Typography
+                    style={styles.descriptionText(
+                      isSelected,
+                      hoveredCard === decor.name
+                    )}
+                  >
                     {decor.description}
                   </Typography>
                   <Typography style={styles.priceText}>
@@ -636,7 +669,9 @@ const WasnaPalace = () => {
                   return (
                     <Box
                       key={pkg.name}
-                      style={styles.card(isSelected)}
+                      style={styles.card(isSelected, hoveredCard === pkg.name)}
+                      onMouseEnter={() => setHoveredCard(pkg.name)}
+                      onMouseLeave={() => setHoveredCard(null)}
                       onClick={() => handleSelect("photography", pkg.name)}
                     >
                       <Typography style={styles.cardText}>
@@ -648,7 +683,10 @@ const WasnaPalace = () => {
                           {pkg.description.map((desc, index) => (
                             <Typography
                               key={index}
-                              style={styles.descriptionText(isSelected)}
+                              style={styles.descriptionText(
+                                isSelected,
+                                hoveredCard === pkg.name
+                              )}
                             >
                               {desc}
                             </Typography>
